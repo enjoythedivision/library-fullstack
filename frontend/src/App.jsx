@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import "./App.css";
 import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
@@ -123,16 +124,22 @@ function App() {
   });
 
   return (
-    <div className="container">
-      <Header />
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        availabilityFilter={availabilityFilter}
-        setAvailabilityFilter={setAvailabilityFilter}
-      />{" "}
-      <BookGrid books={filteredBooks} />{" "}
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="container">
+        <Header />
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          availabilityFilter={availabilityFilter}
+          setAvailabilityFilter={setAvailabilityFilter}
+        />{" "}
+        <BookGrid books={filteredBooks} />
+      </div>
+    </motion.div>
   );
 }
 
