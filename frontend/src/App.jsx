@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
+import BookGrid from "./components/BookGrid";
 
 function App() {
   const books = [
@@ -13,28 +14,28 @@ function App() {
     },
     {
       id: 2,
-      title: "Γκέμμα",
-      author: "Δημήτρης Λιαντίνης",
+      title: "Gemma",
+      author: "Dimitris Liantinis",
       photo: "gemma.jpg",
       isAvailable: true,
     },
     {
       id: 3,
-      title: "Γράμμα στον Πατέρα",
+      title: "Letter to His Father",
       author: "Franz Kafka",
       photo: "letter_to_father.jpg",
       isAvailable: false,
     },
     {
       id: 4,
-      title: "Η Δίκη",
+      title: "The Trial",
       author: "Franz Kafka",
       photo: "trial.jpg",
       isAvailable: true,
     },
     {
       id: 5,
-      title: "Ο Ξένος",
+      title: "The Stranger",
       author: "Albert Camus",
       photo: "stranger.jpg",
       isAvailable: true,
@@ -48,56 +49,56 @@ function App() {
     },
     {
       id: 7,
-      title: "Η Κλέφτρα των Βιβλίων",
+      title: "The Book Thief",
       author: "Markus Zusak",
       photo: "book_thief.jpg",
       isAvailable: true,
     },
     {
       id: 8,
-      title: "Οι Άθλιοι",
+      title: "Les Misérables",
       author: "Victor Hugo",
       photo: "les_miserables.jpg",
       isAvailable: false,
     },
     {
       id: 9,
-      title: "Υπόγειο",
+      title: "Notes from Underground",
       author: "Fyodor Dostoevsky",
       photo: "notes_from_underground.jpg",
       isAvailable: true,
     },
     {
       id: 10,
-      title: "Έγκλημα και Τιμωρία",
+      title: "Crime and Punishment",
       author: "Fyodor Dostoevsky",
       photo: "crime_and_punishment.jpg",
       isAvailable: true,
     },
     {
       id: 11,
-      title: "Αδελφοί Καραμαζόφ",
+      title: "The Brothers Karamazov",
       author: "Fyodor Dostoevsky",
       photo: "karamazov.jpg",
       isAvailable: false,
     },
     {
       id: 12,
-      title: "Το Όνομα του Ρόδου",
+      title: "The Name of the Rose",
       author: "Umberto Eco",
       photo: "name_of_the_rose.jpg",
       isAvailable: true,
     },
     {
       id: 13,
-      title: "Όταν Έκλαψε ο Νίτσε",
+      title: "When Nietzsche Wept",
       author: "Irvin D. Yalom",
       photo: "nietzsche.jpg",
       isAvailable: true,
     },
     {
       id: 14,
-      title: "Κατασκευή Συναίνεσης",
+      title: "Manufacturing Consent",
       author: "Noam Chomsky",
       photo: "manufacturing_consent.jpg",
       isAvailable: false,
@@ -107,6 +108,7 @@ function App() {
   return (
     <div className="container">
       <Header />
+      <BookGrid books={books} />{" "}
     </div>
   );
 }
