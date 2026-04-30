@@ -1,6 +1,70 @@
 .searchBar {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.titleSearch input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  color: #e5e5e5;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  width: 280px;
+  outline: none;
+}
+
+.titleSearch input::placeholder {
+  color: #777;
+}
+
+.titleSearch input:focus {
+  border-bottom: 1px solid #ffffff;
+}
+
+.availabilitySearch {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.availabilitySearch input[type="radio"] {
+  display: none;
+}
+
+.availabilitySearch label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  color: #999;
+  cursor: pointer;
+  position: relative;
+}
+
+.availabilitySearch input:checked + label {
+  color: #ffffff;
+}
+
+.availabilitySearch input:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: #ffffff;
+}
+
+.titleSearch input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+
+  height: 14px;
+  width: 14px;
+
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'><path d='M6 6l8 8M14 6l-8 8' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>") no-repeat center;
+  cursor: pointer;
 }
