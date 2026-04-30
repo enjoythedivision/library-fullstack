@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import "./App.css";
 import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";
+import { Routes, Route } from "react-router-dom";
+import About from "./components/About";
 
 function App() {
   const books = [
@@ -131,13 +133,25 @@ function App() {
     >
       <div className="container">
         <Header />
-        <SearchBar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          availabilityFilter={availabilityFilter}
-          setAvailabilityFilter={setAvailabilityFilter}
-        />{" "}
-        <BookGrid books={filteredBooks} />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <SearchBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  availabilityFilter={availabilityFilter}
+                  setAvailabilityFilter={setAvailabilityFilter}
+                />
+                <BookGrid books={filteredBooks} />
+              </>
+            }
+          />
+
+          <Route path="/about" element={<About />} />
+        </Routes>
       </div>
     </motion.div>
   );
