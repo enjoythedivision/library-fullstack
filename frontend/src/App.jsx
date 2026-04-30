@@ -106,11 +106,32 @@ function App() {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [availabilityFilter, setAvailabilityFilter] = useState("all");
+
+  const filteredBooks = books.filter((book) => {
+    const searchMatch =
+      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const availabilityMatch =
+      availabilityFilter === "all" ||
+      (availabilityFilter === "available" && book.isAvailable) ||
+      (availabilityFilter === "borrowed" && !book.isAvailable);
+
+    return searchMatch && availabilityMatch;
+  });
+
   return (
     <div className="container">
       <Header />
-      <SearchBar />
-      <BookGrid books={books} />{" "}
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        availabilityFilter={availabilityFilter}
+        setAvailabilityFilter={setAvailabilityFilter}
+      />{" "}
+      <BookGrid books={filteredBooks} />{" "}
     </div>
   );
 }
