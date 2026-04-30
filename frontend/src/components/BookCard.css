@@ -1,0 +1,41 @@
+.card {
+  padding: 1rem;
+}
+
+.cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.title {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.author {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #b8b8b8;
+}
+
+.availability {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
