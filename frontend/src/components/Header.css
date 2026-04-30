@@ -1,0 +1,16 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+    gap: 2rem;
+}
