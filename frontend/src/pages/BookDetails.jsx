@@ -21,11 +21,11 @@ export default function BookDetails({ books, onToggleAvailability }) {
           </div>
         </div>
       </div>
-      <p>{book.isAvailable ? "Available" : "Borrowed"}</p>
-
+      <p>{book.isAvailable ? "Available" : "Borrowed"}</p>{" "}
       <button onClick={() => onToggleAvailability(book.id)}>
         {book.isAvailable ? "Borrow" : "Return"}
       </button>
+      <p className="bookSummary">{book.summary}</p>
     </div>
   );
 }
