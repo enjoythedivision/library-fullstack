@@ -1,6 +1,6 @@
 import "./BookCard.css";
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, onToggleAvailability }) {
   return (
     <div className="card">
       <div className="cover">
@@ -13,6 +13,9 @@ export default function BookCard({ book }) {
         <p className="availability">
           {book.isAvailable ? "Available" : "Borrowed"}
         </p>
+        <button onClick={() => onToggleAvailability(book.id) }>
+           {book.isAvailable ? "Borrow" : "Return" }
+        </button>
       </div>
     </div>
   );

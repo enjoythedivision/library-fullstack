@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";
-import { Routes, Route } from "react-router-dom";
 import About from "./components/About";
 
 function App() {
@@ -112,6 +112,8 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
 
+  const location = useLocation();
+
   const filteredBooks = books.filter((book) => {
     const searchMatch =
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -127,41 +129,53 @@ function App() {
 
   function toggleAvailability(bookId) {
     const updatedBooks = books.map((book) =>
-      book.id === bookId ? { ...book, isAvailable: !book.isAvailable } : book,
+      book.id === bookId ? { ...book, isAvailable: !book.isAvailable } : book
     );
 
     setBooks(updatedBooks);
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="container">
-        <Header />
+    <div className="container">
+      <Header />
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <SearchBar
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                  availabilityFilter={availabilityFilter}
-                  setAvailabilityFilter={setAvailabilityFilter}
-                />
-                <BookGrid books={filteredBooks} />
-              </>
-            }
-          />
+      <AnimatePresence mode="wait">
+        <motion.main
+          key={location.pathname}
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 16 }}
+          transition={{ duration: 0.35 }}
+        >
+          <Routes location={location}>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SearchBar
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    availabilityFilter={availabilityFilter}
+                    setAvailabilityFilter={setAvailabilityFilter}
+                  />
 
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
-    </motion.div>
+                  {filteredBooks.length === 0 ? (
+                    <p>No books found.</p>
+                  ) : (
+                    <BookGrid
+                      books={filteredBooks}
+                      onToggleAvailability={toggleAvailability}
+                    />
+                  )}
+                </>
+              }
+            />
+
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </motion.main>
+      </AnimatePresence>
+    </div>
   );
 }
 
