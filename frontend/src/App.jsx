@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import About from "./components/About";
 
 function App() {
-  const books = [
+  const [books, setBooks] = useState([
     {
       id: 1,
       title: "Trainspotting",
@@ -107,7 +107,7 @@ function App() {
       photo: "consent.jpg",
       isAvailable: false,
     },
-  ];
+  ]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
@@ -124,6 +124,14 @@ function App() {
 
     return searchMatch && availabilityMatch;
   });
+
+  function toggleAvailability(bookId) {
+    const updatedBooks = books.map((book) =>
+      book.id === bookId ? { ...book, isAvailable: !book.isAvailable } : book,
+    );
+
+    setBooks(updatedBooks);
+  }
 
   return (
     <motion.div
