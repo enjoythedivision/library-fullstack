@@ -7,17 +7,13 @@ import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";
 import About from "./components/About";
+import BookDetails from "./pages/BookDetails";
 
 function App() {
-  
   const [books, setBooks] = useState(initialBooks);
-
   const [searchTerm, setSearchTerm] = useState("");
-
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
-
   const location = useLocation();
-
   const filteredBooks = books.filter((book) => {
     const searchMatch =
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -33,7 +29,7 @@ function App() {
 
   function toggleAvailability(bookId) {
     const updatedBooks = books.map((book) =>
-      book.id === bookId ? { ...book, isAvailable: !book.isAvailable } : book
+      book.id === bookId ? { ...book, isAvailable: !book.isAvailable } : book,
     );
 
     setBooks(updatedBooks);
@@ -76,6 +72,15 @@ function App() {
             />
 
             <Route path="/about" element={<About />} />
+            <Route
+              path="/books/:id"
+              element={
+                <BookDetails
+                  books={books}
+                  onToggleAvailability={toggleAvailability}
+                />
+              }
+            />
           </Routes>
         </motion.main>
       </AnimatePresence>
