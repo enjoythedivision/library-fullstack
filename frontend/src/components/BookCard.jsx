@@ -13,7 +13,7 @@ export default function BookCard({ book, onToggleAvailability }) {
         <p className="availability">
           {book.isAvailable ? "Available" : "Borrowed"}
         </p>
-        <button onClick={() => onToggleAvailability(book.id) }>
+        <button className="borrowBtn" onClick={() => onToggleAvailability(book.id) }>
            {book.isAvailable ? "Borrow" : "Return" }
         </button>
       </div>

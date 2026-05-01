@@ -34,3 +34,43 @@
   font-size: 0.85rem;
   font-weight: 600;
 }
+
+.borrowBtn {
+  margin-top: 0.75rem;
+
+  background: transparent;
+  border: none;
+
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+
+  color: #e5e5e5;
+  cursor: pointer;
+
+  padding: 0;
+  position: relative;
+}
+
+.borrowBtn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: #e5e5e5;
+
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.borrowBtn:hover::after {
+  transform: scaleX(1);
+}
+
+.borrowBtn.disabled {
+  color: #777;
+  cursor: not-allowed;
+}
