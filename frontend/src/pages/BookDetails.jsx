@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "./BookDetails.css";
 
 export default function BookDetails({ books, onToggleAvailability }) {
@@ -21,10 +21,19 @@ export default function BookDetails({ books, onToggleAvailability }) {
           </div>
         </div>
       </div>
-      <p>{book.isAvailable ? "Available" : "Borrowed"}</p>{" "}
-      <button onClick={() => onToggleAvailability(book.id)}>
-        {book.isAvailable ? "Borrow" : "Return"}
-      </button>
+      <div className="bookNav">
+        <div className="bookLeft">
+          <Link to="/">Back to books</Link>
+        </div>
+
+        <div className="bookRight">
+          <p>{book.isAvailable ? "Available" : "Borrowed"}</p>
+          <button onClick={() => onToggleAvailability(book.id)}>
+            {book.isAvailable ? "Borrow" : "Return"}
+          </button>
+        </div>
+      </div>
+
       <p className="bookSummary">{book.summary}</p>
     </div>
   );

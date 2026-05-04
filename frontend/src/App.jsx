@@ -2,7 +2,6 @@ import { useState } from "react";
 import { initialBooks } from "./data/books";
 import { motion, AnimatePresence } from "framer-motion";
 import { Routes, Route, useLocation } from "react-router-dom";
-import "./App.css";
 import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";

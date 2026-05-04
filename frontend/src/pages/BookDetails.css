@@ -23,3 +23,29 @@
   );
 }
 
+.bookNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bookRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.bookSummary {
+  font-size: 1.4rem;
+  font-weight: 200;;
+}
+
+.bookNav button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #fffbea;
+  background-color: transparent;
+  color:#fffbea;
+  cursor: pointer;
+}
