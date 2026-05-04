@@ -23,7 +23,7 @@ export default function BookDetails({ books, onToggleAvailability }) {
       </div>
       <div className="bookNav">
         <div className="bookLeft">
-          <Link to="/">Back to books</Link>
+          <Link to="/">← Back to books</Link>
         </div>
 
         <div className="bookRight">
