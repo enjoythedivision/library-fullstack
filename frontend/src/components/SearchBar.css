@@ -4,6 +4,7 @@
   align-items: center;
   margin-bottom: 2rem;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .titleSearch input {
@@ -30,6 +31,29 @@
   display: flex;
   gap: 1.5rem;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .titleSearch input {
+    width: 100%;
+  }
+
+  .availabilitySearch {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchBar {
+    gap: 1rem;
+  }
+
+  .availabilitySearch {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 .availabilitySearch input[type="radio"] {

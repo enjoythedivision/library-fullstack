@@ -29,6 +29,7 @@
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .bookRight {
@@ -39,7 +40,7 @@
 
 .bookSummary {
   font-size: 1.4rem;
-  font-weight: 200;;
+  font-weight: 200;
 }
 
 .bookNav button {
@@ -48,4 +49,43 @@
   background-color: transparent;
   color:#fffbea;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .bookHero {
+    height: 260px;
+  }
+
+  .bookHero .overlay {
+    padding: 1.5rem 0;
+  }
+
+  .bookSummary {
+    font-size: 1.2rem;
+  }
+
+  .bookNav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bookRight {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookHero {
+    height: 220px;
+  }
+
+  .bookSummary {
+    font-size: 1rem;
+  }
+
+  .bookNav button {
+    width: 100%;
+  }
 }

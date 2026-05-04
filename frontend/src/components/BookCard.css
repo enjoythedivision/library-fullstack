@@ -74,3 +74,10 @@
   color: #777;
   cursor: not-allowed;
 }
+
+@media (max-width: 480px) {
+  .cover {
+    aspect-ratio: auto;
+    min-height: 220px;
+  }
+}
