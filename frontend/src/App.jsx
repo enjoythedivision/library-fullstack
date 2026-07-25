@@ -5,7 +5,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";
-import About from "./components/About";
+import About from "./pages/About";
 import BookDetails from "./pages/BookDetails";
 
 function App() {
