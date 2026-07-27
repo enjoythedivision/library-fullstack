@@ -5,22 +5,22 @@ using LibraryApi.Data;
 
 [Route("api/[controller]")]
 [ApiController]
-public class Books1Controller : ControllerBase
+public class BooksController : ControllerBase
 {
     private readonly LibraryContext _context;
-    public Books1Controller(LibraryContext context)
+    public BooksController(LibraryContext context)
     {
         _context = context;
     }
 
-    // GET: api/Book
+    // GET: api/Books
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Book>>> GetBook()
+    public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
     {
         return await _context.Books.ToListAsync();
     }
 
-    // GET: api/Book/5
+    // GET: api/Books/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Book>> GetBook(int id)
     {
@@ -34,7 +34,7 @@ public class Books1Controller : ControllerBase
         return book;
     }
 
-    // PUT: api/Book/5
+    // PUT: api/Books/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutBook(int? id, Book book)
@@ -65,7 +65,7 @@ public class Books1Controller : ControllerBase
         return NoContent();
     }
 
-    // POST: api/Book
+    // POST: api/Books
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<Book>> PostBook(Book book)
@@ -76,7 +76,7 @@ public class Books1Controller : ControllerBase
         return CreatedAtAction("GetBook", new { id = book.Id }, book);
     }
 
-    // DELETE: api/Book/5
+    // DELETE: api/Books/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBook(int? id)
     {
