@@ -1,0 +1,30 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+
+# React
+*.local
+
+# Visual Studio
+.vs/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+
+# .NET
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
