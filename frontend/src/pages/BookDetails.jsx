@@ -12,7 +12,7 @@ export default function BookDetails({ books, onToggleAvailability }) {
     <div>
       <div
         className="bookHero"
-        style={{ backgroundImage: `url(${book.imageurl})` }}
+        style={{ backgroundImage: `url(${book.imageUrl})` }}
       >
         <div className="overlay">
           <div className="container">

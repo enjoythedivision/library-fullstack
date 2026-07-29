@@ -5,7 +5,7 @@ export default function BookCard({ book, onToggleAvailability }) {
   return (
     <Link to={`/books/${book.id}`} className="card">
       <div className="cover">
-        <img src={book.imageurl} alt={book.title} />
+        <img src={book.imageUrl} alt={book.title} />
       </div>
 
       <div className="metadata">
