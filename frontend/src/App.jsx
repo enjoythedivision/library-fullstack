@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch("http://localhost:7071/api/Books");
+      const response = await fetch("http://localhost:5038/api/Books");
       const data = await response.json();
 
       setBooks(data);
