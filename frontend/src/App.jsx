@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { initialBooks } from "./data/books";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
@@ -9,7 +8,7 @@ import About from "./pages/About";
 import BookDetails from "./pages/BookDetails";
 
 function App() {
-  const [books, setBooks] = useState(initialBooks);
+  const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const location = useLocation();
@@ -33,6 +32,17 @@ function App() {
 
     setBooks(updatedBooks);
   }
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const response = await fetch("http://localhost:7071/api/Books");
+      const data = await response.json();
+
+      setBooks(data);
+    };
+
+    fetchBooks();
+  }, []);
 
   return (
     <div className="container">
