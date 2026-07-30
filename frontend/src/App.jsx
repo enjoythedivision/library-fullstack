@@ -26,7 +26,24 @@ function App() {
   });
 
   async function toggleAvailability(bookId) {
-   //TODO: Fix toggle button request
+    const bookToUpdate = books.find((b) => b.id === bookId);
+    const newAvailability = !bookToUpdate.isAvailable;
+    const updatedBook = {
+      ...bookToUpdate,
+      isAvailable: newAvailability,
+    };
+
+    const response = await fetch(`http://localhost:5038/api/Books/${bookId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedBook),
+    });
+
+    if (response.ok) {
+      setBooks(books.map((b) => b.id === bookId ? updatedBook : b ))
+    }
   }
 
   useEffect(() => {
