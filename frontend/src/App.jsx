@@ -25,12 +25,8 @@ function App() {
     return searchMatch && availabilityMatch;
   });
 
-  function toggleAvailability(bookId) {
-    const updatedBooks = books.map((book) =>
-      book.id === bookId ? { ...book, isAvailable: !book.isAvailable } : book,
-    );
-
-    setBooks(updatedBooks);
+  async function toggleAvailability(bookId) {
+   //TODO: Fix toggle button request
   }
 
   useEffect(() => {
