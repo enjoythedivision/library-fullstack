@@ -13,8 +13,12 @@ export default function Header() {
             <li>
               <Link to="/">Books</Link>
             </li>
+
             <li>
               <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/addbook">+ Add Book</Link>
             </li>
           </ul>
         </nav>
