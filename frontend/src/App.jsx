@@ -6,6 +6,7 @@ import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";
 import About from "./pages/About";
 import BookDetails from "./pages/BookDetails";
+import AddBook from "./pages/AddBook";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -103,6 +104,7 @@ function App() {
                 />
               }
             />
+            <Route path="/addbook" element={<AddBook/>}/>
           </Routes>
         </motion.main>
       </AnimatePresence>
