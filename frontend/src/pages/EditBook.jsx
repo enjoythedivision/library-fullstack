@@ -1,10 +1,23 @@
 import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 
 export default function EditBook() {
+  const { id } = useParams();
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    async function fetchBook() {
+        const response = await fetch()
+    }
+  })
+
+  async function handleEdit(event) {}
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleEdit}>
         <input
           type="text"
           value={title}
