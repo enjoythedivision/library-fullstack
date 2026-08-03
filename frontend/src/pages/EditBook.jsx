@@ -3,15 +3,17 @@ import { useParams, Link } from "react-router-dom";
 
 export default function EditBook({ books }) {
   const { id } = useParams();
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [description, setDescription] = useState("");
 
   const bookToEdit = books.find((b) => b.id === Number(id));
+  const [title, setTitle] = useState(bookToEdit.title);
+  const [author, setAuthor] = useState(bookToEdit.author);
+  const [description, setDescription] = useState(bookToEdit.description);
+  const [isAvailable, setIsAvailable] = useState(bookToEdit.isAvailable)
 
   async function handleEdit(event) {
     event.preventDefault();
-    const response = await fetch(`http://localhost:5038/api/Books`, {
+    const editedBook = {};
+    const response = await fetch(`http://localhost:5038/api/Books/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -19,11 +21,7 @@ export default function EditBook({ books }) {
       body: JSON.stringify(bookToEdit),
     });
 
-    if (response.ok) {
-      setTitle("");
-      setAuthor("");
-      setDescription("");
-    } else {
+    if (!response.ok) {
       alert("Failed to edit book.");
     }
   }
