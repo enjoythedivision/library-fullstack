@@ -1,19 +1,32 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
-export default function EditBook({books}) {
+export default function EditBook({ books }) {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    async function fetchBook() {
-        const response = await fetch()
-    }
-  })
+  const bookToEdit = books.find((b) => b.id === Number(id));
 
-  async function handleEdit(event) {}
+  async function handleEdit(event) {
+    event.preventDefault();
+    const response = await fetch(`http://localhost:5038/api/Books`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookToEdit),
+    });
+
+    if (response.ok) {
+      setTitle("");
+      setAuthor("");
+      setDescription("");
+    } else {
+      alert("Failed to edit book.");
+    }
+  }
 
   return (
     <>
