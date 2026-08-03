@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 export default function EditBook({ books }) {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const bookToEdit = books.find((b) => b.id === Number(id));
@@ -12,7 +13,13 @@ export default function EditBook({ books }) {
 
   async function handleEdit(event) {
     event.preventDefault();
-    const editedBook = { ...bookToEdit, title, description, author, isAvailable };
+    const editedBook = {
+      ...bookToEdit,
+      title,
+      description,
+      author,
+      isAvailable,
+    };
     const response = await fetch(`http://localhost:5038/api/Books/${id}`, {
       method: "PUT",
       headers: {
@@ -21,7 +28,10 @@ export default function EditBook({ books }) {
       body: JSON.stringify(editedBook),
     });
 
-    if (!response.ok) {
+    if (response.ok) {
+      alert("Book updated successfully.");
+      navigate(`/books/${id}`);
+    } else {
       alert("Failed to edit book.");
     }
   }
