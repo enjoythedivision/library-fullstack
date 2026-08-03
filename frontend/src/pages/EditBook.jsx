@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
-export default function EditBook() {
+export default function EditBook({books}) {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");

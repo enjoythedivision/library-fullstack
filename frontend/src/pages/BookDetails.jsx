@@ -31,6 +31,7 @@ export default function BookDetails({ books, onToggleAvailability }) {
           <button onClick={() => onToggleAvailability(book.id)}>
             {book.isAvailable ? "Borrow" : "Return"}
           </button>
+          <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
         </div>
       </div>
 
