@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar";
 import About from "./pages/About";
 import BookDetails from "./pages/BookDetails";
 import AddBook from "./pages/AddBook";
+import EditBook from "./pages/EditBook";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -43,7 +44,7 @@ function App() {
     });
 
     if (response.ok) {
-      setBooks(books.map((b) => b.id === bookId ? updatedBook : b ))
+      setBooks(books.map((b) => (b.id === bookId ? updatedBook : b)));
     }
   }
 
@@ -104,7 +105,11 @@ function App() {
                 />
               }
             />
-            <Route path="/addbook" element={<AddBook/>}/>
+            <Route path="/addbook" element={<AddBook />} />
+            <Route
+              path="/books/:id/edit"
+              element={<EditBook books={books} />}
+            />
           </Routes>
         </motion.main>
       </AnimatePresence>
