@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,6 +23,8 @@ export default function AddBook() {
       setTitle("");
       setAuthor("");
       setDescription("");
+      alert("Book added successfully.");
+      navigate(`/`);
     } else {
       alert("Failed to add book.");
     }
