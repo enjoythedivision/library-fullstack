@@ -8,13 +8,14 @@ import About from "./pages/About";
 import BookDetails from "./pages/BookDetails";
 import AddBook from "./pages/AddBook";
 import EditBook from "./pages/EditBook";
+import DeleteBook from "./pages/DeleteBook";
 
 function App() {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const location = useLocation();
-  
+
   const filteredBooks = books.filter((book) => {
     const searchMatch =
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -111,6 +112,7 @@ function App() {
               path="/books/:id/edit"
               element={<EditBook books={books} fetchBooks={fetchBooks}/>}
             />
+            <Route path="/books/:id/delete" element={<EditBook books={books} fetchBooks={fetchBooks}/>}/>
           </Routes>
         </motion.main>
       </AnimatePresence>

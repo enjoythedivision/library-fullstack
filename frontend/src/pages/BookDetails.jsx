@@ -32,6 +32,7 @@ export default function BookDetails({ books, onToggleAvailability }) {
             {book.isAvailable ? "Borrow" : "Return"}
           </button>
           <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
+          <Link to={`/books/${book.id}/delete`}>Delete Book</Link>
         </div>
       </div>
 
