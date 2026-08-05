@@ -48,14 +48,14 @@ function App() {
     }
   }
 
+  const fetchBooks = async () => {
+    const response = await fetch("http://localhost:5038/api/Books");
+    const data = await response.json();
+
+    setBooks(data);
+  };
+
   useEffect(() => {
-    const fetchBooks = async () => {
-      const response = await fetch("http://localhost:5038/api/Books");
-      const data = await response.json();
-
-      setBooks(data);
-    };
-
     fetchBooks();
   }, []);
 
@@ -108,7 +108,7 @@ function App() {
             <Route path="/addbook" element={<AddBook />} />
             <Route
               path="/books/:id/edit"
-              element={<EditBook books={books} />}
+              element={<EditBook books={books} fetchBooks={fetchBooks}/>}
             />
           </Routes>
         </motion.main>

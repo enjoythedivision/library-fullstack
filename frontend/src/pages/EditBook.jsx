@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-export default function EditBook({ books }) {
+export default function EditBook({ books, fetchBooks }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -20,6 +20,7 @@ export default function EditBook({ books }) {
       author,
       isAvailable,
     };
+
     const response = await fetch(`http://localhost:5038/api/Books/${id}`, {
       method: "PUT",
       headers: {
@@ -29,6 +30,7 @@ export default function EditBook({ books }) {
     });
 
     if (response.ok) {
+      await fetchBooks();
       alert("Book updated successfully.");
       navigate(`/books/${id}`);
     } else {
