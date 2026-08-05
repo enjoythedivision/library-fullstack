@@ -14,6 +14,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const location = useLocation();
+  
   const filteredBooks = books.filter((book) => {
     const searchMatch =
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

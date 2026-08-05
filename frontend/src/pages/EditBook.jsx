@@ -6,6 +6,7 @@ export default function EditBook({ books, fetchBooks }) {
   const { id } = useParams();
 
   const bookToEdit = books.find((b) => b.id === Number(id));
+  
   const [title, setTitle] = useState(bookToEdit.title);
   const [author, setAuthor] = useState(bookToEdit.author);
   const [description, setDescription] = useState(bookToEdit.description);
