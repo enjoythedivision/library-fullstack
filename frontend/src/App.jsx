@@ -112,7 +112,7 @@ function App() {
               path="/books/:id/edit"
               element={<EditBook books={books} fetchBooks={fetchBooks}/>}
             />
-            <Route path="/books/:id/delete" element={<EditBook books={books} fetchBooks={fetchBooks}/>}/>
+            <Route path="/books/:id/delete" element={<DeleteBook books={books} fetchBooks={fetchBooks}/>}/>
           </Routes>
         </motion.main>
       </AnimatePresence>
