@@ -25,11 +25,10 @@ export default function DeleteBook({ books, fetchBooks }) {
   return (
     <>
       <p>
-        Are you sure you want to delete {bookToDelete.title} by
-        {bookToDelete.author}?
+        Are you sure you want to delete {bookToDelete.title} by {bookToDelete.author}?
       </p>
       <button onClick={handleDelete}>Yes, delete this book</button>
-      <Link to="/">Cancel</Link>
+      <Link to={`/books/${id}`}>Cancel</Link>
     </>
   );
 }
