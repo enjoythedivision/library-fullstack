@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
+      <Header user={user}/>
 
       <AnimatePresence mode="wait">
         <motion.main
