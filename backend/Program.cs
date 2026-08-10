@@ -1,5 +1,6 @@
 using LibraryApi.Data;
 using LibraryApi.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,10 @@ builder.Services.AddDbContext<LibraryContext>(options =>
         builder.Configuration.GetConnectionString("LibraryConnection")
     )
 );
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<LibraryContext>();
+
 
 builder.Services.AddCors(options =>
 {
@@ -39,6 +44,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapIdentityApi<IdentityUser>();
 
 using (var scope = app.Services.CreateScope())
 {

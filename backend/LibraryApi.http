@@ -4,3 +4,11 @@ GET {{LibraryApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{LibraryApi_HostAddress}}/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Test123!"
+}
