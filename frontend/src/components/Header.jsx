@@ -10,21 +10,6 @@ export default function Header({ user }) {
       <div className="right">
         <nav>
           <ul>
-            {user ? (
-              <>
-                <li>
-                  <Link to="/">Logout</Link> 
-                  {/* TODO: Add logout page + logic */}
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </>
-            )}
-
             <li>
               <Link to="/">Books</Link>
             </li>
@@ -35,6 +20,20 @@ export default function Header({ user }) {
             <li>
               <Link to="/addbook">+ Add Book</Link>
             </li>
+            {user ? (
+              <>
+                <li>
+                  <Link to="/">Logout</Link>
+                  {/* TODO: Add logout page + logic */}
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>

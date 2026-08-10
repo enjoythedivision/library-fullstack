@@ -12,3 +12,13 @@ Content-Type: application/json
   "email": "user@example.com",
   "password": "Test123!"
 }
+
+###
+
+POST {{LibraryApi_HostAddress}}/login?useCookies=true
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Test123!"
+}
