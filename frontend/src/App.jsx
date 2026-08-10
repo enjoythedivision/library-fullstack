@@ -9,6 +9,8 @@ import BookDetails from "./pages/BookDetails";
 import AddBook from "./pages/AddBook";
 import EditBook from "./pages/EditBook";
 import DeleteBook from "./pages/DeleteBook";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -113,6 +115,8 @@ function App() {
               element={<EditBook books={books} fetchBooks={fetchBooks}/>}
             />
             <Route path="/books/:id/delete" element={<DeleteBook books={books} fetchBooks={fetchBooks}/>}/>
+            <Route path="/login" element={<Login/>}></Route>
+            <Route path="/register" element={<Register/>}></Route>
           </Routes>
         </motion.main>
       </AnimatePresence>
