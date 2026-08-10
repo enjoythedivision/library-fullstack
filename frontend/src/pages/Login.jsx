@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({fetchCurrentUser}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -25,11 +25,11 @@ export default function Login() {
     );
 
     if (response.ok) {
-      alert("Log in successful!");
+      await fetchCurrentUser();
+      alert("Welcome!");
       navigate("/");
-    }
-    else {
-        alert("Failed to login.");
+    } else {
+      alert("Failed to login.");
     }
   }
 

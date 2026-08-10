@@ -13,7 +13,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 function App() {
-  
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,8 +60,25 @@ function App() {
     setBooks(data);
   };
 
+  async function fetchCurrentUser() {
+    const response = await fetch("http://localhost:5038/manage/info", {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setUser(data);
+    } else {
+      setUser(null);
+    }
+  }
+
   useEffect(() => {
     fetchBooks();
+  }, []);
+
+  useEffect(() => {
+    fetchCurrentUser();
   }, []);
 
   return (
@@ -100,7 +116,6 @@ function App() {
                 </>
               }
             />
-
             <Route path="/about" element={<About />} />
             <Route
               path="/books/:id"
@@ -114,11 +129,17 @@ function App() {
             <Route path="/addbook" element={<AddBook />} />
             <Route
               path="/books/:id/edit"
-              element={<EditBook books={books} fetchBooks={fetchBooks}/>}
+              element={<EditBook books={books} fetchBooks={fetchBooks} />}
             />
-            <Route path="/books/:id/delete" element={<DeleteBook books={books} fetchBooks={fetchBooks}/>}/>
-            <Route path="/login" element={<Login/>}></Route>
-            <Route path="/register" element={<Register/>}></Route>
+            <Route
+              path="/books/:id/delete"
+              element={<DeleteBook books={books} fetchBooks={fetchBooks} />}
+            />
+            <Route
+              path="/login"
+              element={<Login fetchCurrentUser={fetchCurrentUser} />}
+            />
+            <Route path="/register" element={<Register />}></Route>
           </Routes>
         </motion.main>
       </AnimatePresence>
