@@ -123,6 +123,7 @@ function App() {
               element={
                 <BookDetails
                   books={books}
+                  user={user}
                   onToggleAvailability={toggleAvailability}
                 />
               }

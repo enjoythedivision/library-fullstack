@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import "./BookDetails.css";
 
-export default function BookDetails({ books, onToggleAvailability }) {
+export default function BookDetails({ books, onToggleAvailability, user }) {
   const { id } = useParams();
 
   const book = books.find((b) => b.id === Number(id));
@@ -27,12 +27,18 @@ export default function BookDetails({ books, onToggleAvailability }) {
         </div>
 
         <div className="bookRight">
-          <p>{book.isAvailable ? "Available" : "Borrowed"}</p>
-          <button onClick={() => onToggleAvailability(book.id)}>
-            {book.isAvailable ? "Borrow" : "Return"}
-          </button>
-          <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
-          <Link to={`/books/${book.id}/delete`}>Delete Book</Link>
+          {user ? (
+            <>
+              <p>{book.isAvailable ? "Available" : "Borrowed"}</p>
+              <button onClick={() => onToggleAvailability(book.id)}>
+                {book.isAvailable ? "Borrow" : "Return"}
+              </button>
+              <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
+              <Link to={`/books/${book.id}/delete`}>Delete Book</Link>
+            </>
+          ) : (
+            <button><Link to="/login">Log in to borrow books.</Link></button>
+          )}
         </div>
       </div>
 
