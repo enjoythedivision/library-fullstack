@@ -14,11 +14,11 @@ export default function Logout() {
     });
 
     if (response.ok) {
-      await fetchCurrentUser();
-      alert("Welcome!");
+      setUser(null);
+      alert("Logout successful.");
       navigate("/");
     } else {
-      alert("Failed to login.");
+      alert("Failed to logout.");
     }
   }
 

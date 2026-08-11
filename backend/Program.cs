@@ -53,7 +53,6 @@ app.MapPost("/logout", async (
 
     return Results.Unauthorized();
 })
-.WithOpenApi()
 .RequireAuthorization();
 
 app.UseHttpsRedirection();
