@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "./Auth.css";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -32,26 +33,30 @@ export default function Register() {
   }
 
   return (
-    <>
-      <h1>Create your account to borrow books from the library.</h1>
-      <form onSubmit={handleRegister}>
-        <input
+    <div className="auth-page">
+      <div className="auth-card">
+        <h1 className="auth-title">Create your account to borrow books from the library.</h1>
+        <form className="auth-form" onSubmit={handleRegister}>
+          <input
+          className="auth-input"
           type="email"
           placeholder="mail@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          className="auth-input"
           type="password"
           placeholder="******"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Create account</button>
-        <p>
+        <button className="auth-button" type="submit">Create account</button>
+        <p className="auth-footer">
           Already have an account? <Link to="/login">Sign in here.</Link>
         </p>
       </form>
-    </>
+      </div>
+    </div>
   );
 }
