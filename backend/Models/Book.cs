@@ -13,4 +13,6 @@ public class Book
     public string? ImageUrl { get; set; }
 
     public bool IsAvailable { get; set; } = true;
+
+    public string? BorrowedByUserId { get; set; }
 }
