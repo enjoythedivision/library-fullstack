@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./BookForm.css";
 
 export default function AddBook() {
   const [title, setTitle] = useState("");
@@ -31,28 +32,33 @@ export default function AddBook() {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={title}
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          value={author}
-          placeholder="Author"
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <input
-          type="text"
-          value={description}
-          placeholder="Book description..."
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button type="submit">Add Book</button>
-      </form>
-    </>
+    <div className="form-page">
+      <div className="form-card">
+        <h1 className="form-title">Add a new book</h1>
+        <form className="form-fields" onSubmit={handleSubmit}>
+          <input
+            className="form-input"
+            type="text"
+            value={title}
+            placeholder="Title"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            className="form-input"
+            type="text"
+            value={author}
+            placeholder="Author"
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+          <textarea
+            className="form-textarea"
+            value={description}
+            placeholder="Book description..."
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button className="form-button" type="submit">Add Book</button>
+        </form>
+      </div>
+    </div>
   );
 }

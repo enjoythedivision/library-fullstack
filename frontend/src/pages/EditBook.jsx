@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import "./BookForm.css";
 
 export default function EditBook({ books, fetchBooks }) {
   const navigate = useNavigate();
@@ -40,33 +41,46 @@ export default function EditBook({ books, fetchBooks }) {
   }
 
   return (
-    <>
-      <form onSubmit={handleEdit}>
-        <input
-          type="text"
-          value={title}
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          value={author}
-          placeholder="Author"
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <input
-          type="text"
-          value={description}
-          placeholder="Book description..."
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <input
-          type="checkbox"
-          checked={isAvailable}
-          onChange={(e) => setIsAvailable(e.target.checked)}
-        />{" "}
-        <button type="submit">Save Changes</button>
-      </form>
-    </>
+    <div className="form-page">
+      <div className="form-card">
+        <h1 className="form-title">Edit book details</h1>
+        <form className="form-fields" onSubmit={handleEdit}>
+          <input
+            className="form-input"
+            type="text"
+            value={title}
+            placeholder="Title"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            className="form-input"
+            type="text"
+            value={author}
+            placeholder="Author"
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+          <textarea
+            className="form-textarea"
+            value={description}
+            placeholder="Book description..."
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <div className="form-row">
+            <label className="form-checkbox">
+              <input
+                type="checkbox"
+                checked={isAvailable}
+                onChange={(e) => setIsAvailable(e.target.checked)}
+              />
+              Available to borrow
+            </label>
+          </div>
+          <div className="form-actions">
+            <button className="form-button" type="submit">Save Changes</button>
+            <Link className="action-button" to={`/books/${id}`}>Cancel</Link>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
