@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 
-export default function Logout() {
+export default function Logout({setUser}) {
   const navigate = useNavigate();
 
   async function handleLogout(event) {

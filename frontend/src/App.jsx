@@ -84,7 +84,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header user={user}/>
+      <Header user={user} />
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -141,6 +141,7 @@ function App() {
               element={<Login fetchCurrentUser={fetchCurrentUser} />}
             />
             <Route path="/register" element={<Register />}></Route>
+            <Route path="/logout" element={<Logout setUser={setUser} />} />
           </Routes>
         </motion.main>
       </AnimatePresence>
