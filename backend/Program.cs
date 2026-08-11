@@ -1,6 +1,7 @@
 using LibraryApi.Data;
 using LibraryApi.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,11 +41,19 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 //MINIMAL LOGOUT ENDPOINT FROM DOCUMENTATION
-app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager) =>
+app.MapPost("/logout", async (
+    SignInManager<IdentityUser> signInManager,
+    [FromBody] object empty) =>
 {
-    await signInManager.SignOutAsync();
-    return Results.Ok();
+    if (empty != null)
+    {
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }
+
+    return Results.Unauthorized();
 })
+.WithOpenApi()
 .RequireAuthorization();
 
 app.UseHttpsRedirection();
