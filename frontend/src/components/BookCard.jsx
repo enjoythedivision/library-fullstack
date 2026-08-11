@@ -14,15 +14,6 @@ export default function BookCard({ book, onToggleAvailability }) {
         <p className="availability">
           {book.isAvailable ? "Available" : "Borrowed"}
         </p>
-        <button
-          className="borrowBtn"
-          onClick={(e) => {
-            e.preventDefault(); // σταματάει το Link navigation
-            onToggleAvailability(book.id);
-          }}
-        >
-          {book.isAvailable ? "Borrow" : "Return"}
-        </button>
       </div>
     </Link>
   );
