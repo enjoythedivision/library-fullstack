@@ -50,6 +50,7 @@ export default function Login({fetchCurrentUser}) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Log in</button>
+        <p>Don't have an account? <Link to="/register">Create one here.</Link></p>
       </form>
     </>
   );

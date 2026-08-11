@@ -17,14 +17,14 @@ export default function Header({ user }) {
             <li>
               <Link to="/about">About</Link>
             </li>
-            <li>
-              <Link to="/addbook">+ Add Book</Link>
-            </li>
+
             {user ? (
               <>
                 <li>
-                  <Link to="/">Logout</Link>
-                  {/* TODO: Add logout page + logic */}
+                  <Link to="/addbook">+ Add Book</Link>
+                </li>
+                <li>
+                  <Link to="/logout">Logout</Link>
                 </li>
               </>
             ) : (
