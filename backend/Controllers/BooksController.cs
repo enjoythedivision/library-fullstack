@@ -3,6 +3,7 @@ using LibraryApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -98,6 +99,7 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpPost("{id}/borrow")]
     public async Task<IActionResult> BorrowBook(int id)
     {
