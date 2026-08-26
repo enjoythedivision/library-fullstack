@@ -1,7 +1,7 @@
 # TODO
 
-* [ ] Finish user-specific Borrow / Return with `BorrowedByUserId`
-* [ ] Remove old `toggleAvailability` / `IsAvailable` logic where redundant
+* [x] Finish user-specific Borrow / Return with `BorrowedByUserId`
+* [x] Remove old `toggleAvailability` / `IsAvailable` logic where redundant
 * [ ] Add User + Admin roles
 * [ ] Protect Add / Edit / Delete book endpoints with authorization
 * [ ] Show Add / Edit / Delete actions only to Admin users
