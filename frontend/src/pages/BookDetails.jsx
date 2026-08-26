@@ -29,8 +29,12 @@ export default function BookDetails({ books, user, onBorrow, onReturn }) {
         <div className="bookRight">
           {user ? (
             <>
-              <p>{book.isAvailable ? "Available" : "Borrowed"}</p>
-              <button onClick={() => onBorrow(book.id)}>Borrow</button>
+              <p>{book.borrowedByUserId ? "Borrowed" : "Available"}</p>{" "}
+              {book.borrowedByUserId ? (
+                <button onClick={() => onReturn(book.id)}>Return</button>
+              ) : (
+                <button onClick={() => onBorrow(book.id)}>Borrow</button>
+              )}
               <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
               <Link to={`/books/${book.id}/delete`}>Delete Book</Link>
             </>

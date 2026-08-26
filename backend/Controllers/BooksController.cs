@@ -128,6 +128,36 @@ public class BooksController : ControllerBase
 
     }
 
+    [Authorize]
+    [HttpPost("{id}/return")]
+    public async Task<IActionResult> ReturnBook(int id)
+    {
+        var book = await _context.Books.FindAsync(id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        var currentUser = await _userManager.GetUserAsync(User);
+
+        if (currentUser == null)
+        {
+            return Unauthorized();
+        }
+
+        if (book.BorrowedByUserId != currentUser.Id)
+        {
+            return Forbid();
+        }
+
+        book.BorrowedByUserId = null;
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
     private bool BookExists(int? id)
     {
         return _context.Books.Any(e => e.Id == id);
