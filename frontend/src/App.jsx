@@ -48,6 +48,10 @@ function App() {
         credentials: "include",
       },
     );
+
+    if (response.ok) {
+      await fetchBooks();
+    }
   }
 
   async function fetchCurrentUser() {
@@ -106,7 +110,13 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route
               path="/books/:id"
-              element={<BookDetails books={books} user={user} />}
+              element={
+                <BookDetails
+                  books={books}
+                  user={user}
+                  onBorrow={handleBorrow}
+                />
+              }
             />
             <Route path="/addbook" element={<AddBook />} />
             <Route
