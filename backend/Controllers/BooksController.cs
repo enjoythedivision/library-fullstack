@@ -74,6 +74,7 @@ public class BooksController : ControllerBase
 
     // POST: api/Books
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<Book>> PostBook(Book book)
     {
