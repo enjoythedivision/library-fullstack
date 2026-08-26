@@ -3,6 +3,7 @@ using LibraryApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +63,19 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseAuthentication();
+
+//ΜΙΝΙΜAL ENDPOINT TO CHECK IF THE USER IS AN ADMIN
+app.MapGet("/is-admin", (ClaimsPrincipal user) =>
+{
+    return Results.Ok(new
+    {
+        isAdmin = user.IsInRole("Admin")
+    });
+})
+.RequireAuthorization();
+
 //MINIMAL LOGOUT ENDPOINT FROM DOCUMENTATION
 app.MapPost("/logout", async (
     SignInManager<IdentityUser> signInManager,

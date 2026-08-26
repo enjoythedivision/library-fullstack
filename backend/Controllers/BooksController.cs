@@ -43,6 +43,7 @@ public class BooksController : ControllerBase
 
     // PUT: api/Books/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutBook(int? id, Book book)
     {
@@ -85,6 +86,7 @@ public class BooksController : ControllerBase
     }
 
     // DELETE: api/Books/5
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBook(int? id)
     {
