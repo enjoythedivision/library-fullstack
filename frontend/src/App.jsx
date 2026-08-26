@@ -40,6 +40,16 @@ function App() {
     setBooks(data);
   };
 
+  async function handleBorrow(bookId) {
+    const response = await fetch(
+      `http://localhost:5038/api/Books/${bookId}/borrow`,
+      {
+        method: "POST",
+        credentials: "include",
+      },
+    );
+  }
+
   async function fetchCurrentUser() {
     const response = await fetch("http://localhost:5038/manage/info", {
       credentials: "include",
@@ -88,9 +98,7 @@ function App() {
                   {filteredBooks.length === 0 ? (
                     <p>No books found.</p>
                   ) : (
-                    <BookGrid
-                      books={filteredBooks}
-                    />
+                    <BookGrid books={filteredBooks} />
                   )}
                 </>
               }
@@ -98,12 +106,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route
               path="/books/:id"
-              element={
-                <BookDetails
-                  books={books}
-                  user={user}
-                />
-              }
+              element={<BookDetails books={books} user={user} />}
             />
             <Route path="/addbook" element={<AddBook />} />
             <Route
