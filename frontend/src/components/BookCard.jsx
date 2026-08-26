@@ -1,7 +1,7 @@
 import "./BookCard.css";
 import { Link } from "react-router-dom";
 
-export default function BookCard({ book, onToggleAvailability }) {
+export default function BookCard({ book}) {
   return (
     <Link to={`/books/${book.id}`} className="card">
       <div className="cover">

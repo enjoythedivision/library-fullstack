@@ -33,28 +33,6 @@ function App() {
     return searchMatch && availabilityMatch;
   });
 
-  async function toggleAvailability(bookId) {
-    const bookToUpdate = books.find((b) => b.id === bookId);
-    const newAvailability = !bookToUpdate.isAvailable;
-    const updatedBook = {
-      ...bookToUpdate,
-      isAvailable: newAvailability,
-    };
-
-    const response = await fetch(`http://localhost:5038/api/Books/${bookId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        credentials: "include"
-      },
-      body: JSON.stringify(updatedBook),
-    });
-
-    if (response.ok) {
-      setBooks(books.map((b) => (b.id === bookId ? updatedBook : b)));
-    }
-  }
-
   const fetchBooks = async () => {
     const response = await fetch("http://localhost:5038/api/Books");
     const data = await response.json();
@@ -112,7 +90,6 @@ function App() {
                   ) : (
                     <BookGrid
                       books={filteredBooks}
-                      onToggleAvailability={toggleAvailability}
                     />
                   )}
                 </>
@@ -125,7 +102,6 @@ function App() {
                 <BookDetails
                   books={books}
                   user={user}
-                  onToggleAvailability={toggleAvailability}
                 />
               }
             />
