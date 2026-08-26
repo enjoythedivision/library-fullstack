@@ -54,6 +54,20 @@ function App() {
     }
   }
 
+  async function handleReturn(bookId) {
+    const response = await fetch(
+      `http://localhost:5038/api/Books/${bookId}/return`,
+      {
+        method: "POST",
+        credentials: "include",
+      },
+    );
+
+    if (response.ok) {
+      await fetchBooks();
+    }
+  }
+
   async function fetchCurrentUser() {
     const response = await fetch("http://localhost:5038/manage/info", {
       credentials: "include",
@@ -115,6 +129,7 @@ function App() {
                   books={books}
                   user={user}
                   onBorrow={handleBorrow}
+                  onReturn={handleReturn}
                 />
               }
             />
