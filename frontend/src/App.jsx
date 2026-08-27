@@ -142,7 +142,7 @@ function App() {
                 />
               }
             />
-            <Route path="/addbook" element={<AddBook />} />
+            <Route path="/addbook" element={<AddBook fetchBooks={fetchBooks} />} />
             <Route
               path="/books/:id/edit"
               element={<EditBook books={books} fetchBooks={fetchBooks} />}

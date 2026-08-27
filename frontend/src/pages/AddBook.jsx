@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./BookForm.css";
 import { addBook } from "../services/booksApi";
 
-export default function AddBook() {
+export default function AddBook( {fetchBooks} ) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
@@ -18,6 +18,7 @@ export default function AddBook() {
       setTitle("");
       setAuthor("");
       setDescription("");
+      await fetchBooks();
       alert("Book added successfully.");
       navigate("/");
     } else {

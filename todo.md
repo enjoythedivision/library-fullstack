@@ -8,6 +8,7 @@
 * [x] Make sure users can only return books they borrowed
 * [ ] Display useful registration / login validation errors
 * [x] Clean up repeated API URLs
+* [ ] Update Books state after adding a new book (as Admin)
 ------------------------------------------------------------------------------------------
 * [ ] Final end-to-end test of register, login, logout, borrow, return, add, edit, delete
 * [ ] Clean up README and add project setup / features / screenshots
