@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./BookForm.css";
+import { editBook } from "../services/booksApi";
 
 export default function EditBook({ books, fetchBooks }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const bookToEdit = books.find((b) => b.id === Number(id));
-  
+
   const [title, setTitle] = useState(bookToEdit.title);
   const [author, setAuthor] = useState(bookToEdit.author);
   const [description, setDescription] = useState(bookToEdit.description);
@@ -15,21 +16,15 @@ export default function EditBook({ books, fetchBooks }) {
 
   async function handleEdit(event) {
     event.preventDefault();
+
     const editedBook = {
       ...bookToEdit,
       title,
       description,
-      author,
-      isAvailable,
+      author
     };
 
-    const response = await fetch(`http://localhost:5038/api/Books/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedBook),
-    });
+    const response = await editBook(id, editedBook);
 
     if (response.ok) {
       await fetchBooks();
@@ -76,8 +71,12 @@ export default function EditBook({ books, fetchBooks }) {
             </label>
           </div>
           <div className="form-actions">
-            <button className="form-button" type="submit">Save Changes</button>
-            <Link className="action-button" to={`/books/${id}`}>Cancel</Link>
+            <button className="form-button" type="submit">
+              Save Changes
+            </button>
+            <Link className="action-button" to={`/books/${id}`}>
+              Cancel
+            </Link>
           </div>
         </form>
       </div>

@@ -12,6 +12,11 @@ import DeleteBook from "./pages/DeleteBook";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout";
+import {
+  getBooks,
+  borrowBook,
+  returnBook,
+} from "./services/booksApi";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,20 +40,14 @@ function App() {
   });
 
   const fetchBooks = async () => {
-    const response = await fetch("http://localhost:5038/api/Books");
+    const response = await getBooks();
     const data = await response.json();
 
     setBooks(data);
   };
 
   async function handleBorrow(bookId) {
-    const response = await fetch(
-      `http://localhost:5038/api/Books/${bookId}/borrow`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-    );
+    const response = await borrowBook(bookId);
 
     if (response.ok) {
       await fetchBooks();
@@ -56,13 +55,7 @@ function App() {
   }
 
   async function handleReturn(bookId) {
-    const response = await fetch(
-      `http://localhost:5038/api/Books/${bookId}/return`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-    );
+    const response = await returnBook(bookId);
 
     if (response.ok) {
       await fetchBooks();

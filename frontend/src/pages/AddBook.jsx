@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./BookForm.css";
+import { addBook } from "../services/booksApi";
 
 export default function AddBook() {
   const [title, setTitle] = useState("");
@@ -8,24 +9,17 @@ export default function AddBook() {
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
-
   async function handleSubmit(event) {
     event.preventDefault();
-    const newBook = { title, author, description, isAvailable: true };
-    const response = await fetch(`http://localhost:5038/api/Books`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newBook),
-    });
+    const newBook = { title, author, description };
+    const response = await addBook(newBook);
 
     if (response.ok) {
       setTitle("");
       setAuthor("");
       setDescription("");
       alert("Book added successfully.");
-      navigate(`/`);
+      navigate("/");
     } else {
       alert("Failed to add book.");
     }
@@ -56,7 +50,9 @@ export default function AddBook() {
             placeholder="Book description..."
             onChange={(e) => setDescription(e.target.value)}
           />
-          <button className="form-button" type="submit">Add Book</button>
+          <button className="form-button" type="submit">
+            Add Book
+          </button>
         </form>
       </div>
     </div>

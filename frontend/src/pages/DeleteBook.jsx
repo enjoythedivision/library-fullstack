@@ -1,5 +1,6 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import "./BookForm.css";
+import { deleteBook } from "../services/booksApi";
 
 export default function DeleteBook({ books, fetchBooks }) {
   const navigate = useNavigate();
@@ -10,16 +11,14 @@ export default function DeleteBook({ books, fetchBooks }) {
   if (!bookToDelete) return <p>Book not found.</p>;
 
   async function handleDelete(event) {
-    const response = await fetch (`http://localhost:5038/api/Books/${id}`, {
-        method: 'DELETE',
-    });
+    const response = await deleteBook(id);
 
     if (response.ok) {
-        await fetchBooks();
-        alert("Book deleted successfully.");
-        navigate("/");
+      await fetchBooks();
+      alert("Book deleted successfully.");
+      navigate("/");
     } else {
-        alert("Failed to delete book.");
+      alert("Failed to delete book.");
     }
   }
 
@@ -28,11 +27,16 @@ export default function DeleteBook({ books, fetchBooks }) {
       <div className="form-card">
         <h1 className="form-title">Delete book</h1>
         <p className="confirm-text">
-          Are you sure you want to delete <strong>{bookToDelete.title}</strong> by <strong>{bookToDelete.author}</strong>?
+          Are you sure you want to delete <strong>{bookToDelete.title}</strong>{" "}
+          by <strong>{bookToDelete.author}</strong>?
         </p>
         <div className="form-actions">
-          <button className="danger-button" onClick={handleDelete}>Yes, delete this book</button>
-          <Link className="action-button" to={`/books/${id}`}>Cancel</Link>
+          <button className="danger-button" onClick={handleDelete}>
+            Yes, delete this book
+          </button>
+          <Link className="action-button" to={`/books/${id}`}>
+            Cancel
+          </Link>
         </div>
       </div>
     </div>
