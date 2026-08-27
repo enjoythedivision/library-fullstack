@@ -12,11 +12,8 @@ import DeleteBook from "./pages/DeleteBook";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout";
-import {
-  getBooks,
-  borrowBook,
-  returnBook,
-} from "./services/booksApi";
+import { getBooks, borrowBook, returnBook } from "./services/booksApi";
+import { getCurrentUser, getAdminStatus } from "./services/authApi";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -63,9 +60,7 @@ function App() {
   }
 
   async function fetchCurrentUser() {
-    const response = await fetch("http://localhost:5038/manage/info", {
-      credentials: "include",
-    });
+    const response = await getCurrentUser();
 
     if (response.ok) {
       const data = await response.json();
@@ -76,9 +71,7 @@ function App() {
   }
 
   async function checkIsAdmin() {
-    const response = await fetch("http://localhost:5038/is-admin", {
-      credentials: "include",
-    });
+    const response = await getAdminStatus();
 
     if (response.ok) {
       const data = await response.json();

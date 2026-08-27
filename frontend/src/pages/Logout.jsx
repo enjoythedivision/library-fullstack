@@ -1,17 +1,11 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../services/authApi";
 
-export default function Logout({setUser}) {
+export default function Logout({ setUser }) {
   const navigate = useNavigate();
 
   async function handleLogout(event) {
-    const response = await fetch("http://localhost:5038/logout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({}),
-    });
+    const response = await logoutUser();
 
     if (response.ok) {
       setUser(null);

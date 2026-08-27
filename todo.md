@@ -7,7 +7,7 @@
 * [x] Show Add / Edit / Delete actions only to Admin users
 * [x] Make sure users can only return books they borrowed
 * [ ] Display useful registration / login validation errors
-* [ ] Clean up repeated API URLs
+* [x] Clean up repeated API URLs
 ------------------------------------------------------------------------------------------
 * [ ] Final end-to-end test of register, login, logout, borrow, return, add, edit, delete
 * [ ] Clean up README and add project setup / features / screenshots

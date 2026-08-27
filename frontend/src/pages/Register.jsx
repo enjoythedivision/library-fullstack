@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
+import { registerUser } from "../services/authApi";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -9,21 +10,13 @@ export default function Register() {
 
   async function handleRegister(event) {
     event.preventDefault();
+
     const user = {
       email,
       password,
     };
-    const response = await fetch(
-      "http://localhost:5038/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(user),
-      },
-    );
+
+    const response = await registerUser(user);
 
     if (response.ok) {
       navigate("/login");
@@ -35,27 +28,31 @@ export default function Register() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">Create your account to borrow books from the library.</h1>
+        <h1 className="auth-title">
+          Create your account to borrow books from the library.
+        </h1>
         <form className="auth-form" onSubmit={handleRegister}>
           <input
-          className="auth-input"
-          type="email"
-          placeholder="mail@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className="auth-input"
-          type="password"
-          placeholder="******"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className="auth-button" type="submit">Create account</button>
-        <p className="auth-footer">
-          Already have an account? <Link to="/login">Sign in here.</Link>
-        </p>
-      </form>
+            className="auth-input"
+            type="email"
+            placeholder="mail@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="auth-input"
+            type="password"
+            placeholder="******"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="auth-button" type="submit">
+            Create account
+          </button>
+          <p className="auth-footer">
+            Already have an account? <Link to="/login">Sign in here.</Link>
+          </p>
+        </form>
       </div>
     </div>
   );
