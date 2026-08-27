@@ -1,7 +1,7 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
 
-export default function Header({ user, checkIsAdmin }) {
+export default function Header({ user, isAdmin }) {
   return (
     <header>
       <div className="left">
@@ -20,9 +20,12 @@ export default function Header({ user, checkIsAdmin }) {
 
             {user ? (
               <>
-                <li>
-                  <Link to="/addbook">+ Add Book</Link>
-                </li>
+                {isAdmin && (
+                  <li>
+                    <Link to="/addbook">+ Add Book</Link>
+                  </li>
+                )}
+
                 <li>
                   <Link to="/logout">Logout</Link>
                 </li>

@@ -1,7 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import "./BookDetails.css";
 
-export default function BookDetails({ books, user, onBorrow, onReturn, checkIsAdmin}) {
+export default function BookDetails({
+  books,
+  user,
+  onBorrow,
+  onReturn,
+  isAdmin,
+}) {
   const { id } = useParams();
 
   const book = books.find((b) => b.id === Number(id));
@@ -34,9 +40,13 @@ export default function BookDetails({ books, user, onBorrow, onReturn, checkIsAd
                 <button onClick={() => onReturn(book.id)}>Return</button>
               ) : (
                 <button onClick={() => onBorrow(book.id)}>Borrow</button>
+              )}{" "}
+              {isAdmin && (
+                <>
+                  <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
+                  <Link to={`/books/${book.id}/delete`}>Delete Book</Link>
+                </>
               )}
-              <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
-              <Link to={`/books/${book.id}/delete`}>Delete Book</Link>
             </>
           ) : (
             <button>

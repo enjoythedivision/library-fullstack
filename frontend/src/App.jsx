@@ -103,9 +103,17 @@ function App() {
     fetchCurrentUser();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      checkIsAdmin();
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
+
   return (
     <div className="container">
-      <Header user={user} checkIsAdmin={checkIsAdmin}/>
+      <Header user={user} isAdmin={isAdmin} />
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -144,7 +152,7 @@ function App() {
                   user={user}
                   onBorrow={handleBorrow}
                   onReturn={handleReturn}
-                  checkIsAdmin={checkIsAdmin}
+                  isAdmin={isAdmin}
                 />
               }
             />
