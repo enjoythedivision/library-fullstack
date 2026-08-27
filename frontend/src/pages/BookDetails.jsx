@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import "./BookDetails.css";
 
-export default function BookDetails({ books, user, onBorrow, onReturn }) {
+export default function BookDetails({ books, user, onBorrow, onReturn, checkIsAdmin}) {
   const { id } = useParams();
 
   const book = books.find((b) => b.id === Number(id));

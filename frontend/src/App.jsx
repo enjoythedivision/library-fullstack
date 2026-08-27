@@ -18,6 +18,7 @@ function App() {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
+  const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
 
   const filteredBooks = books.filter((book) => {
@@ -81,6 +82,19 @@ function App() {
     }
   }
 
+  async function checkIsAdmin() {
+    const response = await fetch("http://localhost:5038/is-admin", {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setIsAdmin(data.isAdmin);
+    } else {
+      setIsAdmin(false);
+    }
+  }
+
   useEffect(() => {
     fetchBooks();
   }, []);
@@ -91,7 +105,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header user={user} />
+      <Header user={user} checkIsAdmin={checkIsAdmin}/>
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -130,6 +144,7 @@ function App() {
                   user={user}
                   onBorrow={handleBorrow}
                   onReturn={handleReturn}
+                  checkIsAdmin={checkIsAdmin}
                 />
               }
             />
