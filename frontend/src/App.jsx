@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Routes, Route, useLocation } from "react-router-dom";
+
 import Header from "./components/Header";
 import BookGrid from "./components/BookGrid";
 import SearchBar from "./components/SearchBar";
@@ -12,6 +13,7 @@ import DeleteBook from "./pages/DeleteBook";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout";
+
 import { getBooks, borrowBook, returnBook } from "./services/booksApi";
 import { getCurrentUser, getAdminStatus } from "./services/authApi";
 

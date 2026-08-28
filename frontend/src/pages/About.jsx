@@ -10,8 +10,7 @@ export default function About() {
         ASP.NET Core Identity handles authentication.</p> <p>My goal with this app is to explore
         core full-stack concepts like component-based architecture, state
         management, REST APIs, database integration, authentication/authorization, and
-        communication between a React frontend and a .NET backend.</p> <p>Since I like
-        taking care of the visual aspect of my projects as well, I implemented a
+        communication between a React frontend and a .NET backend.</p> <p>I implemented a
         minimal dark interface with vanilla CSS, where each stylesheet lives
         next to its component. A great alternative option would be SCSS but due
         to the small size of the project I found it redundant.</p> <p>The project is
