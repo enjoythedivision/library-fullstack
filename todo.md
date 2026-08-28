@@ -7,7 +7,7 @@
 * [x] Show Add / Edit / Delete actions only to Admin users
 * [x] Make sure users can only return books they borrowed
 * [ ] Display UI errors when theres is a borrowed by user ID mismatch?
-* [ ] Make sure to remove unecessary isAvailable properties
+* [x] Make sure to remove unecessary isAvailable properties
 * [x] Clean up repeated API URLs
 * [x] Update Books state after adding a new book (as Admin)
 ------------------------------------------------------------------------------------------

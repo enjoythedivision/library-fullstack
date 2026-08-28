@@ -30,8 +30,8 @@ function App() {
 
     const availabilityMatch =
       availabilityFilter === "all" ||
-      (availabilityFilter === "available" && book.isAvailable) ||
-      (availabilityFilter === "borrowed" && !book.isAvailable);
+      (availabilityFilter === "available" && !book.borrowedByUserId) ||
+      (availabilityFilter === "borrowed" && book.borrowedByUserId);
 
     return searchMatch && availabilityMatch;
   });
@@ -142,7 +142,10 @@ function App() {
                 />
               }
             />
-            <Route path="/addbook" element={<AddBook fetchBooks={fetchBooks} />} />
+            <Route
+              path="/addbook"
+              element={<AddBook fetchBooks={fetchBooks} />}
+            />
             <Route
               path="/books/:id/edit"
               element={<EditBook books={books} fetchBooks={fetchBooks} />}
