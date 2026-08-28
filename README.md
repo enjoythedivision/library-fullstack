@@ -1,7 +1,9 @@
-This is a full-stack library application built with React and ASP.NET Core Web API, which allows users to browse a collection of books, search for titles/authors, view detailed information, and manage book availability. The React frontend communicates with a backend API that handles data access and app logic.
+This project is a full-stack library application built with React and ASP.NET Core Web API, which allows users to browse/borrow a collection of books, search for titles/authors, view information, and manage book availability. If a user is authorized as an Admin, they can also add, edit and delete books from the library. The React frontend communicates with a backend API that handles data access and app logic. The app uses roles ASP.NET Core Identity for authentication and authorization.
 
-## features
+### Features
 
+- User login
+- Admin roles
 - Browse available books
 - Search books by title or author
 - View book details
@@ -9,7 +11,7 @@ This is a full-stack library application built with React and ASP.NET Core Web A
 - Consume data from a REST API
 - Store and manage data through a SQL database
 
-## technologies
+### Technologies
 
 Frontend:
 - React
@@ -17,11 +19,11 @@ Frontend:
 - JavaScript
 - CSS
 
-Backend:
-- ASP.NET Core Web API
+### Backend:
+- ASP.NET Core Web API & ASP.NET Core Identity
 - C#
 - Entity Framework Core
 - SQL Server
 
-## project structure
-TBA
+### Project structure
+Monorepo structure with separate directories for the frontend and the backend
