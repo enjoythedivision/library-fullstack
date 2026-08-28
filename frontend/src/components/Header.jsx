@@ -22,18 +22,18 @@ export default function Header({ user, isAdmin }) {
               <>
                 {isAdmin && (
                   <li>
-                    <Link to="/addbook">+ Add Book</Link>
+                    <Link className="header-cta" to="/addbook">+ Add Book</Link>
                   </li>
                 )}
 
                 <li>
-                  <Link to="/logout">Logout</Link>
+                  <Link className="header-cta header-logout" to="/logout">Logout</Link>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <Link to="/login">Login</Link>
+                  <Link className="header-cta" to="/login">Login</Link>
                 </li>
               </>
             )}

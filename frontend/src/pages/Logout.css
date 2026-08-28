@@ -1,0 +1,52 @@
+.logout-page {
+  min-height: calc(100vh - 8rem);
+  display: grid;
+  place-items: center;
+  padding: 3rem 0;
+}
+
+.logout-card {
+  width: min(100%, 34rem);
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  background: rgba(16, 16, 16, 0.96);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.32);
+  text-align: center;
+}
+
+.logout-title {
+  margin-bottom: 1rem;
+  color: #f9f0df;
+}
+
+.logout-text {
+  margin-bottom: 1.75rem;
+  color: #d5d5d5;
+}
+
+.logout-button {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #d8564f;
+  border-radius: 10px;
+  background: #d8564f;
+  color: #fff8ea;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.logout-button:hover {
+  border-color: #e6756d;
+  background: #e6756d;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .logout-card {
+    padding: 2rem 1.5rem;
+  }
+}
