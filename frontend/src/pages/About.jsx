@@ -2,7 +2,7 @@ import "./About.css"
 
 export default function About() {
   return (
-      <>
+      <div className="about-page">
         This project is a simple full-stack library application built with React, SQLite
         and ASP.NET Core. <p>It allows users to browse, search and filter books,
         as well as create an account and log in to interact with the library.
@@ -17,6 +17,6 @@ export default function About() {
         to the small size of the project I found it redundant.</p> <p>The project is
         still a work in progress as I continue learning and revisiting to better my
         development practices.</p> <p>Thanks for stopping by! :)</p>
-      </>
+      </div>
   );
 }
