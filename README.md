@@ -27,3 +27,17 @@ Frontend:
 
 ### Project structure
 Monorepo structure with separate directories for the frontend and the backend
+
+### Local development
+
+Install Node.js and the .NET SDK required by `backend/LibraryApi.csproj`, then run these commands from the repository root:
+
+```sh
+npm install
+npm --prefix frontend install
+npm run dev
+```
+
+This starts the Vite frontend and the ASP.NET Core backend with automatic reload. The frontend normally runs at http://localhost:5173 and the backend at http://localhost:5038. Press Ctrl+C to stop both processes.
+
+To run either service separately, use `npm run dev:frontend` or `npm run dev:backend`.

@@ -1,0 +1,12 @@
+{
+  "name": "library-fullstack",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others --names frontend,backend \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "dotnet watch --project backend/LibraryApi.csproj run --launch-profile http"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

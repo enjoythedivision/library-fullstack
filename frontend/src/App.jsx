@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
-import BookGrid from "./components/BookGrid";
-import SearchBar from "./components/SearchBar";
-import About from "./pages/About";
-import BookDetails from "./pages/BookDetails";
-import AddBook from "./pages/AddBook";
-import EditBook from "./pages/EditBook";
-import DeleteBook from "./pages/DeleteBook";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Logout from "./pages/Logout";
+import AppRoutes from "./routes/AppRoutes";
 
 import { getBooks, borrowBook, returnBook } from "./services/booksApi";
 import { getCurrentUser, getAdminStatus } from "./services/authApi";
@@ -111,58 +102,22 @@ function App() {
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.35 }}
         >
-          <Routes location={location}>
-            <Route
-              path="/"
-              element={
-                <>
-                  <SearchBar
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    availabilityFilter={availabilityFilter}
-                    setAvailabilityFilter={setAvailabilityFilter}
-                  />
-
-                  {filteredBooks.length === 0 ? (
-                    <p>No books found.</p>
-                  ) : (
-                    <BookGrid books={filteredBooks} />
-                  )}
-                </>
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/books/:id"
-              element={
-                <BookDetails
-                  books={books}
-                  user={user}
-                  onBorrow={handleBorrow}
-                  onReturn={handleReturn}
-                  isAdmin={isAdmin}
-                />
-              }
-            />
-            <Route
-              path="/addbook"
-              element={<AddBook fetchBooks={fetchBooks} />}
-            />
-            <Route
-              path="/books/:id/edit"
-              element={<EditBook books={books} fetchBooks={fetchBooks} />}
-            />
-            <Route
-              path="/books/:id/delete"
-              element={<DeleteBook books={books} fetchBooks={fetchBooks} />}
-            />
-            <Route
-              path="/login"
-              element={<Login fetchCurrentUser={fetchCurrentUser} />}
-            />
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/logout" element={<Logout setUser={setUser} />} />
-          </Routes>
+          <AppRoutes
+            location={location}
+            books={books}
+            filteredBooks={filteredBooks}
+            user={user}
+            isAdmin={isAdmin}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            availabilityFilter={availabilityFilter}
+            setAvailabilityFilter={setAvailabilityFilter}
+            handleBorrow={handleBorrow}
+            handleReturn={handleReturn}
+            fetchBooks={fetchBooks}
+            fetchCurrentUser={fetchCurrentUser}
+            setUser={setUser}
+          />
         </motion.main>
       </AnimatePresence>
     </div>
