@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5038";
+import { API_URL } from "./apiConfig";
 
 //CREATE BOOK (ADMIN ONLY)
 export async function addBook(book) {
@@ -22,12 +22,12 @@ export async function getBooks() {
 //UPDATE BOOK (ADMIN ONLY)
 export async function editBook(bookId, book) {
   return await fetch(`${API_URL}/api/Books/${bookId}`, {
-    method: "PUT", //could also be a patch request but put is more appropriate for updating the entire book object?
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify(book), //γιατι και bookId KAI book?
+    body: JSON.stringify(book),
   });
 }
 

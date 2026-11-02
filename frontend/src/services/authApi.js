@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5038";
+import { API_URL } from "./apiConfig";
 
 export async function loginUser(user) {
   return await fetch(`${API_URL}/login?useCookies=true`, {
