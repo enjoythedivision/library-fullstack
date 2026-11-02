@@ -10,7 +10,7 @@ export default function DeleteBook({ books, booksLoading, booksError, fetchBooks
   const [isSubmitting, setIsSubmitting] = useState(false);
   const bookToDelete = books.find((book) => book.id === Number(id));
 
-  if (booksLoading && !bookToDelete) return <p className="page-note" role="status">Loading book…</p>;
+  if (booksLoading && !bookToDelete) return <p className="page-note">Loading book…</p>;
   if (!bookToDelete && booksError) return <p className="page-note">Book details could not be loaded.</p>;
   if (!bookToDelete) {
     return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
@@ -39,13 +39,13 @@ export default function DeleteBook({ books, booksLoading, booksError, fetchBooks
   }
 
   return (
-    <section className="form-page" aria-labelledby="delete-book-title">
+    <section className="form-page">
       <div className="form-card form-card-compact">
-        <h1 id="delete-book-title" className="form-title">Delete book</h1>
+        <h1 className="form-title">Delete book</h1>
         <p className="confirm-text">
           <strong>{bookToDelete.title}</strong> by {bookToDelete.author} will be removed from the collection. This cannot be undone.
         </p>
-        {error && <p className="feedback feedback-error" role="alert">{error}</p>}
+        {error && <p className="feedback feedback-error">{error}</p>}
         <div className="form-actions">
           <button className="button button-danger" onClick={handleDelete} disabled={isSubmitting}>
             {isSubmitting ? "Removing book…" : "Delete book"}

@@ -39,11 +39,11 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
   }
 
   return (
-    <section className="auth-page" aria-labelledby="login-title">
+    <section className="auth-page">
       <div className="auth-card">
-        <h1 id="login-title" className="auth-title">Sign in</h1>
+        <h1 className="auth-title">Sign in</h1>
         <p className="page-note">Sign in to borrow and return books.</p>
-        <form className="auth-form" onSubmit={handleLogin} aria-busy={isSubmitting}>
+        <form className="auth-form" onSubmit={handleLogin}>
           <div className="field">
             <label className="field-label" htmlFor="login-email">Email address</label>
             <input
@@ -71,8 +71,8 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
               required
             />
           </div>
-          {error && <p className="feedback feedback-error" role="alert">{error}</p>}
-          <button className="button button-primary auth-submit" type="submit" disabled={isSubmitting}>
+          {error && <p className="feedback feedback-error">{error}</p>}
+          <button className="button button-primary auth-submit" disabled={isSubmitting}>
             {isSubmitting ? "Signing in…" : "Sign in"}
           </button>
         </form>

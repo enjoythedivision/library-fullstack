@@ -36,11 +36,11 @@ export default function Logout({ setUser, fetchBooks }) {
   }
 
   return (
-    <section className="logout-page" aria-labelledby="logout-title">
+    <section className="logout-page">
       <div className="logout-card">
-        <h1 id="logout-title" className="logout-title">Sign out</h1>
+        <h1 className="logout-title">Sign out</h1>
         <p className="logout-text">Are you sure you want to sign out?</p>
-        {error && <p className="feedback feedback-error" role="alert">{error}</p>}
+        {error && <p className="feedback feedback-error">{error}</p>}
         <div className="logout-actions">
           <button className="button button-primary" onClick={handleLogout} disabled={isSubmitting}>
             {isSubmitting ? "Signing out…" : "Sign out"}

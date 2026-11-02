@@ -34,11 +34,11 @@ export default function Register() {
   }
 
   return (
-    <section className="auth-page" aria-labelledby="register-title">
+    <section className="auth-page">
       <div className="auth-card">
-        <h1 id="register-title" className="auth-title">Create account</h1>
+        <h1 className="auth-title">Create account</h1>
         <p className="page-note">Create an account to borrow books.</p>
-        <form className="auth-form" onSubmit={handleRegister} aria-busy={isSubmitting}>
+        <form className="auth-form" onSubmit={handleRegister}>
           <div className="field">
             <label className="field-label" htmlFor="register-email">Email address</label>
             <input
@@ -63,16 +63,15 @@ export default function Register() {
               autoComplete="new-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              aria-describedby="password-hint"
               minLength={6}
               required
             />
-            <p id="password-hint" className="field-hint">
+            <p className="field-hint">
               Use at least 6 characters, with an uppercase letter, a lowercase letter, a number, and a symbol.
             </p>
           </div>
-          {error && <p className="feedback feedback-error" role="alert">{error}</p>}
-          <button className="button button-primary auth-submit" type="submit" disabled={isSubmitting}>
+          {error && <p className="feedback feedback-error">{error}</p>}
+          <button className="button button-primary auth-submit" disabled={isSubmitting}>
             {isSubmitting ? "Creating account…" : "Create account"}
           </button>
         </form>

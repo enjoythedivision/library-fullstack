@@ -53,7 +53,7 @@ export default function BookDetails({
   }
 
   return (
-    <section className="book-details-page" aria-labelledby="book-title">
+    <section className="book-details-page">
       <Link className="book-details-back" to="/">← Back to books</Link>
 
       <div className="book-details-layout">
@@ -72,7 +72,7 @@ export default function BookDetails({
         </div>
 
         <div className="book-details-info">
-          <h1 id="book-title">{book.title}</h1>
+          <h1>{book.title}</h1>
           <p className="book-details-author">by {book.author}</p>
           <p className="book-availability">{statusText}</p>
 
@@ -104,7 +104,6 @@ export default function BookDetails({
             {feedback && (
               <p
                 className={`feedback ${feedback.ok ? "feedback-success" : "feedback-error"}`}
-                role={feedback.ok ? "status" : "alert"}
               >
                 {feedback.message}
               </p>

@@ -35,17 +35,16 @@ export default function AddBook({ fetchBooks }) {
   }
 
   return (
-    <section className="form-page" aria-labelledby="add-book-title">
+    <section className="form-page">
       <div className="form-card">
-        <h1 id="add-book-title" className="form-title">Add a book</h1>
-        <form className="form-fields" onSubmit={handleSubmit} aria-busy={isSubmitting}>
+        <h1 className="form-title">Add a book</h1>
+        <form className="form-fields" onSubmit={handleSubmit}>
           <div className="field">
             <label className="field-label" htmlFor="book-title">Title</label>
             <input
               id="book-title"
               name="title"
               className="form-input"
-              type="text"
               value={title}
               placeholder="Book title"
               onChange={(event) => setTitle(event.target.value)}
@@ -58,7 +57,6 @@ export default function AddBook({ fetchBooks }) {
               id="book-author"
               name="author"
               className="form-input"
-              type="text"
               value={author}
               placeholder="Author's name"
               onChange={(event) => setAuthor(event.target.value)}
@@ -76,9 +74,9 @@ export default function AddBook({ fetchBooks }) {
               onChange={(event) => setDescription(event.target.value)}
             />
           </div>
-          {error && <p className="feedback feedback-error" role="alert">{error}</p>}
+          {error && <p className="feedback feedback-error">{error}</p>}
           <div className="form-actions">
-            <button className="button button-primary" type="submit" disabled={isSubmitting}>
+            <button className="button button-primary" disabled={isSubmitting}>
               {isSubmitting ? "Adding book…" : "Add book"}
             </button>
             <Link className="button button-secondary" to="/">Cancel</Link>

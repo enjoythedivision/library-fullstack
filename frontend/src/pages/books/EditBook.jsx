@@ -7,7 +7,7 @@ export default function EditBook({ books, booksLoading, booksError, fetchBooks }
   const { id } = useParams();
   const bookToEdit = books.find((book) => book.id === Number(id));
 
-  if (booksLoading && !bookToEdit) return <p className="page-note" role="status">Loading book…</p>;
+  if (booksLoading && !bookToEdit) return <p className="page-note">Loading book…</p>;
   if (!bookToEdit && booksError) return <p className="page-note">Book details could not be loaded.</p>;
   if (!bookToEdit) {
     return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
@@ -53,17 +53,16 @@ function EditBookForm({ book, fetchBooks }) {
   }
 
   return (
-    <section className="form-page" aria-labelledby="edit-book-title">
+    <section className="form-page">
       <div className="form-card">
-        <h1 id="edit-book-title" className="form-title">Edit book details</h1>
-        <form className="form-fields" onSubmit={handleEdit} aria-busy={isSubmitting}>
+        <h1 className="form-title">Edit book details</h1>
+        <form className="form-fields" onSubmit={handleEdit}>
           <div className="field">
             <label className="field-label" htmlFor="edit-title">Title</label>
             <input
               id="edit-title"
               name="title"
               className="form-input"
-              type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               required
@@ -75,7 +74,6 @@ function EditBookForm({ book, fetchBooks }) {
               id="edit-author"
               name="author"
               className="form-input"
-              type="text"
               value={author}
               onChange={(event) => setAuthor(event.target.value)}
               required
@@ -91,9 +89,9 @@ function EditBookForm({ book, fetchBooks }) {
               onChange={(event) => setDescription(event.target.value)}
             />
           </div>
-          {error && <p className="feedback feedback-error" role="alert">{error}</p>}
+          {error && <p className="feedback feedback-error">{error}</p>}
           <div className="form-actions">
-            <button className="button button-primary" type="submit" disabled={isSubmitting}>
+            <button className="button button-primary" disabled={isSubmitting}>
               {isSubmitting ? "Saving changes…" : "Save changes"}
             </button>
             <Link className="button button-secondary" to={`/books/${book.id}`}>Cancel</Link>

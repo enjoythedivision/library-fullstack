@@ -144,10 +144,10 @@ function App() {
           transition={{ duration: reducedMotion ? 0 : 0.35 }}
         >
           {location.state?.notice && (
-            <p className="feedback feedback-success route-notice" role="status">{location.state.notice}</p>
+            <p className="feedback feedback-success route-notice">{location.state.notice}</p>
           )}
           {booksError && (
-            <div className="feedback feedback-error collection-error" role="alert">
+            <div className="feedback feedback-error collection-error">
               <p>{booksError}</p>
               <button className="button button-secondary" onClick={fetchBooks} disabled={booksLoading}>
                 {booksLoading ? "Refreshing…" : "Try again"}

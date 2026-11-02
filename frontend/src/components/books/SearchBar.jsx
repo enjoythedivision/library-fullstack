@@ -5,7 +5,7 @@ export default function SearchBar({ searchTerm, setSearchTerm, availabilityFilte
     <div className="catalog-toolbar">
       <div className="catalog-search">
         <label className="visually-hidden" htmlFor="book-search">Search books by title or author</label>
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
           <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5" />
           <path d="m16 16 4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>

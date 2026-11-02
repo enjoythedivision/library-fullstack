@@ -18,10 +18,10 @@ export default function Home({
   }
 
   return (
-    <section aria-labelledby="catalog-title">
+    <section>
       <div className="catalog-intro">
         <div>
-          <h1 id="catalog-title">Browse the library</h1>
+          <h1>Browse the library</h1>
           <p className="page-note">Browse titles, check availability, and borrow a book.</p>
         </div>
         {!booksLoading && <p className="catalog-total">{books.length} books on the shelf</p>}
@@ -32,12 +32,12 @@ export default function Home({
         availabilityFilter={availabilityFilter}
         setAvailabilityFilter={setAvailabilityFilter}
       />
-      <div className="catalog-results" role="status" aria-live="polite">
+      <div className="catalog-results">
         <p>{booksLoading ? "Refreshing the collection…" : `Showing ${filteredBooks.length} of ${books.length} books`}</p>
         <p>{books.filter((book) => !book.borrowedByUserId).length} available to borrow</p>
       </div>
       {booksLoading && books.length === 0 ? (
-        <p className="loading-state" role="status">Loading books…</p>
+        <p className="loading-state">Loading books…</p>
       ) : booksError && books.length === 0 ? (
         <div className="empty-state"><h2>Books couldn't load.</h2><p className="page-note">Use the retry button above to reconnect.</p></div>
       ) : filteredBooks.length === 0 ? (

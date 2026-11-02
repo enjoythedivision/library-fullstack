@@ -4,10 +4,10 @@ import { Link, NavLink } from "react-router-dom";
 export default function Header({ user, isAdmin }) {
   return (
     <header className="site-header">
-      <Link to="/" className="brand" aria-label="Library home">
+      <Link to="/" className="brand">
         Library<span className="brand-dot">.</span>
       </Link>
-      <nav aria-label="Main navigation">
+      <nav>
         <ul>
           <li><NavLink to="/" end className="nav-link">Books</NavLink></li>
           <li><NavLink to="/about" className="nav-link">About</NavLink></li>
