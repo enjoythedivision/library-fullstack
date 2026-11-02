@@ -12,7 +12,6 @@ export default function EditBook({ books, fetchBooks }) {
   const [title, setTitle] = useState(bookToEdit.title);
   const [author, setAuthor] = useState(bookToEdit.author);
   const [description, setDescription] = useState(bookToEdit.description);
-  const [isAvailable, setIsAvailable] = useState(bookToEdit.isAvailable);
 
   async function handleEdit(event) {
     event.preventDefault();
@@ -60,16 +59,6 @@ export default function EditBook({ books, fetchBooks }) {
             placeholder="Book description..."
             onChange={(e) => setDescription(e.target.value)}
           />
-          <div className="form-row">
-            <label className="form-checkbox">
-              <input
-                type="checkbox"
-                checked={isAvailable}
-                onChange={(e) => setIsAvailable(e.target.checked)}
-              />
-              Available to borrow
-            </label>
-          </div>
           <div className="form-actions">
             <button className="form-button" type="submit">
               Save Changes
