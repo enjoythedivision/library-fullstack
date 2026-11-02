@@ -24,7 +24,16 @@ public class BooksController : ControllerBase
 [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
     {
-        return await _context.Books.ToListAsync();
+        var currentUserId = _userManager.GetUserId(User);
+        var books = await _context.Books.ToListAsync();
+
+        foreach (var book in books)
+        {
+            book.IsBorrowedByMe = currentUserId != null &&
+                book.BorrowedByUserId == currentUserId;
+        }
+
+        return books;
     }
 
     // GET: api/Books/5

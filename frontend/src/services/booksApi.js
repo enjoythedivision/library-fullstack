@@ -14,12 +14,7 @@ export async function addBook(book) {
 
 //READ BOOKS
 export async function getBooks() {
-  return await fetch(`${API_URL}/api/Books`);
-}
-
-export async function getBookById(bookId) {
-  return await fetch(`${API_URL}/api/Books/${bookId}`, {
-    method: "GET",
+  return await fetch(`${API_URL}/api/Books`, {
     credentials: "include",
   });
 }

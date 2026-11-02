@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../services/authApi";
 import "./Logout.css";
 
-export default function Logout({ setUser }) {
+export default function Logout({ setUser, fetchBooks }) {
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -10,6 +10,7 @@ export default function Logout({ setUser }) {
 
     if (response.ok) {
       setUser(null);
+      await fetchBooks();
       alert("Logout successful.");
       navigate("/");
     } else {

@@ -1,19 +1,19 @@
 import { useParams, Link } from "react-router-dom";
 import "./BookDetails.css";
-import { useEffect, useState } from "react";
-import { getBookById } from "../services/booksApi";
 
-export default function BookDetails({ user, onBorrow, onReturn, isAdmin }) {
+export default function BookDetails({
+  books,
+  booksLoading,
+  user,
+  onBorrow,
+  onReturn,
+  isAdmin,
+}) {
   const { id } = useParams();
 
-  const [book, setBook] = useState(null);
+  const book = books.find((book) => book.id === Number(id));
 
-  useEffect(() => {
-    getBookById(id)
-      .then((response) => response.json())
-      .then((data) => setBook(data));
-  }, [id]);
-
+  if (booksLoading) return <p>Loading books...</p>;
   if (!book) return <p>Book not found</p>;
 
   return (

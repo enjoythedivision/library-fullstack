@@ -11,6 +11,7 @@ import { getCurrentUser, getAdminStatus } from "./services/authApi";
 function App() {
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
+  const [booksLoading, setBooksLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const [isAdmin, setIsAdmin] = useState(false);
@@ -30,10 +31,15 @@ function App() {
   });
 
   const fetchBooks = async () => {
-    const response = await getBooks();
-    const data = await response.json();
-
-    setBooks(data);
+    setBooksLoading(true);
+    try {
+      const response = await getBooks();
+      if (!response.ok) throw new Error("Failed to load books.");
+      const data = await response.json();
+      setBooks(data);
+    } finally {
+      setBooksLoading(false);
+    }
   };
 
   async function handleBorrow(bookId) {
@@ -105,6 +111,7 @@ function App() {
           <AppRoutes
             location={location}
             books={books}
+            booksLoading={booksLoading}
             filteredBooks={filteredBooks}
             user={user}
             isAdmin={isAdmin}

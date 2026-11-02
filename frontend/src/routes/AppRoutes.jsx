@@ -13,6 +13,7 @@ import Logout from "../pages/Logout";
 export default function AppRoutes({
   location,
   books,
+  booksLoading,
   filteredBooks,
   user,
   isAdmin,
@@ -39,7 +40,9 @@ export default function AppRoutes({
               setAvailabilityFilter={setAvailabilityFilter}
             />
 
-            {filteredBooks.length === 0 ? (
+            {booksLoading ? (
+              <p>Loading books...</p>
+            ) : filteredBooks.length === 0 ? (
               <p>No books found.</p>
             ) : (
               <BookGrid books={filteredBooks} />
@@ -53,6 +56,7 @@ export default function AppRoutes({
         element={
           <BookDetails
             books={books}
+            booksLoading={booksLoading}
             user={user}
             onBorrow={handleBorrow}
             onReturn={handleReturn}
@@ -74,10 +78,10 @@ export default function AppRoutes({
       />
       <Route
         path="/login"
-        element={<Login fetchCurrentUser={fetchCurrentUser} />}
+        element={<Login fetchCurrentUser={fetchCurrentUser} fetchBooks={fetchBooks} />}
       />
       <Route path="/register" element={<Register />}></Route>
-      <Route path="/logout" element={<Logout setUser={setUser} />} />
+      <Route path="/logout" element={<Logout setUser={setUser} fetchBooks={fetchBooks} />} />
     </Routes>
   );
 }

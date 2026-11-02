@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 import { loginUser } from "../services/authApi";
 
-export default function Login({ fetchCurrentUser }) {
+export default function Login({ fetchCurrentUser, fetchBooks }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ export default function Login({ fetchCurrentUser }) {
     const response = await loginUser(user);
 
     if (response.ok) {
+      await fetchBooks();
       await fetchCurrentUser();
       alert("Welcome!");
       navigate("/");
