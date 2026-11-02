@@ -7,7 +7,7 @@ This project is a full-stack library application built with React and ASP.NET Co
 - Browse available books
 - Search books by title or author
 - View book details
-- Toggle book availability
+- Borrow books and return your own loans
 - Consume data from a REST API
 - Store and manage data through a SQL database
 
@@ -23,7 +23,7 @@ Frontend:
 - ASP.NET Core Web API & ASP.NET Core Identity
 - C#
 - Entity Framework Core
-- SQL Server
+- SQLite
 
 ### Project structure
 Monorepo structure with separate directories for the frontend and the backend

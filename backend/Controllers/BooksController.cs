@@ -124,7 +124,6 @@ public class BooksController : ControllerBase
         }
 
         book.BorrowedByUserId = currentUser.Id;
-        _context.Entry(book).State = EntityState.Modified;
         await _context.SaveChangesAsync();
 
         return NoContent();

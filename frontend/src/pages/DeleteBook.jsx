@@ -10,7 +10,7 @@ export default function DeleteBook({ books, fetchBooks }) {
 
   if (!bookToDelete) return <p>Book not found.</p>;
 
-  async function handleDelete(event) {
+  async function handleDelete() {
     const response = await deleteBook(id);
 
     if (response.ok) {
