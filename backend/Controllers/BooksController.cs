@@ -31,12 +31,15 @@ public class BooksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Book>> GetBook(int id)
     {
+        var currentUserId = _userManager.GetUserId(User);
         var book = await _context.Books.FindAsync(id);
 
         if (book == null)
         {
             return NotFound();
         }
+
+        book.IsBorrowedByMe = currentUserId != null && book.BorrowedByUserId == currentUserId;
 
         return book;
     }

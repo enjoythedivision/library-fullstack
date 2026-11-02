@@ -1,4 +1,6 @@
-﻿namespace LibraryApi.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LibraryApi.Models;
 
 public class Book
 {
@@ -13,4 +15,7 @@ public class Book
     public string? ImageUrl { get; set; }
 
     public string? BorrowedByUserId { get; set; }
+
+    [NotMapped]
+    public bool IsBorrowedByMe { get; set; }
 }
