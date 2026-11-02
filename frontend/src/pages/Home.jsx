@@ -12,19 +12,18 @@ export default function Home({
   availabilityFilter,
   setAvailabilityFilter,
 }) {
-  function clearFilters() {
-    setSearchTerm("");
-    setAvailabilityFilter("all");
-  }
-
   return (
     <section>
       <div className="catalog-intro">
         <div>
           <h1>Browse the library</h1>
-          <p className="page-note">Browse titles, check availability, and borrow a book.</p>
+          <p className="page-note">
+            Browse titles, check availability, and borrow a book.
+          </p>
         </div>
-        {!booksLoading && <p className="catalog-total">{books.length} books on the shelf</p>}
+        {!booksLoading && (
+          <p className="catalog-total">{books.length} books on the shelf</p>
+        )}
       </div>
       <SearchBar
         searchTerm={searchTerm}
@@ -33,20 +32,27 @@ export default function Home({
         setAvailabilityFilter={setAvailabilityFilter}
       />
       <div className="catalog-results">
-        <p>{booksLoading ? "Refreshing the collection…" : `Showing ${filteredBooks.length} of ${books.length} books`}</p>
-        <p>{books.filter((book) => !book.borrowedByUserId).length} available to borrow</p>
+        <p>
+          {booksLoading
+            ? "Refreshing the collection…"
+            : `Showing ${filteredBooks.length} of ${books.length} books`}
+        </p>
       </div>
       {booksLoading && books.length === 0 ? (
         <p className="loading-state">Loading books…</p>
       ) : booksError && books.length === 0 ? (
-        <div className="empty-state"><h2>Books couldn't load.</h2><p className="page-note">Use the retry button above to reconnect.</p></div>
+        <div className="empty-state">
+          <h2>Books couldn't load.</h2>
+          <p className="page-note">Use the retry button above to reconnect.</p>
+        </div>
       ) : filteredBooks.length === 0 ? (
         <div className="empty-state">
           <h2>{books.length === 0 ? "No books yet." : "No books found."}</h2>
-          <p className="page-note">{books.length === 0 ? "New additions will appear here." : "Try a different title, author, or availability filter."}</p>
-          {(searchTerm || availabilityFilter !== "all") && (
-            <button className="button button-secondary" onClick={clearFilters}>Clear filters</button>
-          )}
+          <p className="page-note">
+            {books.length === 0
+              ? "New additions will appear here."
+              : "Try a different title, author, or availability filter."}
+          </p>
         </div>
       ) : (
         <BookGrid books={filteredBooks} user={user} />
