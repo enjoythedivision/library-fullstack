@@ -17,6 +17,13 @@ export async function getBooks() {
   return await fetch(`${API_URL}/api/Books`);
 }
 
+export async function getBookById(bookId) {
+  return await fetch(`${API_URL}/api/Books/${bookId}`, {
+    method: "GET",
+    credentials: "include",
+  });
+}
+
 //UPDATE BOOK (ADMIN ONLY)
 export async function editBook(bookId, book) {
   return await fetch(`${API_URL}/api/Books/${bookId}`, {

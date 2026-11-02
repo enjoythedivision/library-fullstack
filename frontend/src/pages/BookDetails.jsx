@@ -1,16 +1,18 @@
 import { useParams, Link } from "react-router-dom";
 import "./BookDetails.css";
+import { useEffect, useState } from "react";
+import { getBookById } from "../services/booksApi";
 
-export default function BookDetails({
-  books,
-  user,
-  onBorrow,
-  onReturn,
-  isAdmin,
-}) {
+export default function BookDetails({ user, onBorrow, onReturn, isAdmin }) {
   const { id } = useParams();
 
-  const book = books.find((b) => b.id === Number(id));
+  const [book, setBook] = useState(null);
+
+  useEffect(() => {
+    getBookById(id)
+      .then((response) => response.json())
+      .then((data) => setBook(data));
+  }, [id]);
 
   if (!book) return <p>Book not found</p>;
 
@@ -35,12 +37,17 @@ export default function BookDetails({
         <div className="bookRight">
           {user ? (
             <>
-              <p>{book.borrowedByUserId ? "Borrowed" : "Available"}</p>{" "}
+              <p>{book.borrowedByUserId ? "Borrowed" : "Available"}</p>
+
               {book.borrowedByUserId ? (
-                <button onClick={() => onReturn(book.id)}>Return</button>
+                book.isBorrowedByMe ? (
+                  <button onClick={() => onReturn(book.id)}>Return</button>
+                ) : (
+                  <p>Borrowed by someone else.</p>
+                )
               ) : (
                 <button onClick={() => onBorrow(book.id)}>Borrow</button>
-              )}{" "}
+              )}
               {isAdmin && (
                 <>
                   <Link to={`/books/${book.id}/edit`}>Edit Book</Link>
