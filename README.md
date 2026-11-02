@@ -26,7 +26,20 @@ Frontend:
 - SQLite
 
 ### Project structure
-Monorepo structure with separate directories for the frontend and the backend
+Monorepo with separate frontend and backend directories.
+
+Within `frontend/src`:
+- `components/books/`: book cards, book grid, and search controls.
+- `components/`: the shared header and its styles.
+- `pages/books/`: book details and add, edit, and delete pages.
+- `pages/auth/`: login, registration, and logout pages.
+- `pages/`: the About page.
+- `services/`: API requests and the shared API URL.
+- `routes/`: route definitions.
+- `App.jsx`: shared state and application layout.
+
+Styles remain beside their components and pages. The backend keeps its
+existing `Controllers`, `Data`, `Models`, and `Migrations` folders.
 
 ### Local development
 

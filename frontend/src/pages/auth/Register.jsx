@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
-import { loginUser } from "../services/authApi";
+import { registerUser } from "../../services/authApi";
 
-export default function Login({ fetchCurrentUser, fetchBooks }) {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  async function handleLogin(event) {
+  async function handleRegister(event) {
     event.preventDefault();
 
     const user = {
@@ -16,23 +16,22 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
       password,
     };
 
-    const response = await loginUser(user);
+    const response = await registerUser(user);
 
     if (response.ok) {
-      await fetchBooks();
-      await fetchCurrentUser();
-      alert("Welcome!");
-      navigate("/");
+      navigate("/login");
     } else {
-      alert("Failed to login.");
+      alert("Failed to create account.");
     }
   }
 
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">Welcome back!</h1>
-        <form className="auth-form" onSubmit={handleLogin}>
+        <h1 className="auth-title">
+          Create your account to borrow books from the library.
+        </h1>
+        <form className="auth-form" onSubmit={handleRegister}>
           <input
             className="auth-input"
             type="email"
@@ -48,10 +47,10 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className="auth-button" type="submit">
-            Log in
+            Create account
           </button>
           <p className="auth-footer">
-            Don't have an account? <Link to="/register">Create one here.</Link>
+            Already have an account? <Link to="/login">Sign in here.</Link>
           </p>
         </form>
       </div>

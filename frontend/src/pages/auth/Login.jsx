@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
-import { registerUser } from "../services/authApi";
+import { loginUser } from "../../services/authApi";
 
-export default function Register() {
+export default function Login({ fetchCurrentUser, fetchBooks }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  async function handleRegister(event) {
+  async function handleLogin(event) {
     event.preventDefault();
 
     const user = {
@@ -16,22 +16,23 @@ export default function Register() {
       password,
     };
 
-    const response = await registerUser(user);
+    const response = await loginUser(user);
 
     if (response.ok) {
-      navigate("/login");
+      await fetchBooks();
+      await fetchCurrentUser();
+      alert("Welcome!");
+      navigate("/");
     } else {
-      alert("Failed to create account.");
+      alert("Failed to login.");
     }
   }
 
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">
-          Create your account to borrow books from the library.
-        </h1>
-        <form className="auth-form" onSubmit={handleRegister}>
+        <h1 className="auth-title">Welcome back!</h1>
+        <form className="auth-form" onSubmit={handleLogin}>
           <input
             className="auth-input"
             type="email"
@@ -47,10 +48,10 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className="auth-button" type="submit">
-            Create account
+            Log in
           </button>
           <p className="auth-footer">
-            Already have an account? <Link to="/login">Sign in here.</Link>
+            Don't have an account? <Link to="/register">Create one here.</Link>
           </p>
         </form>
       </div>

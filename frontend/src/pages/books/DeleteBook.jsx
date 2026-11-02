@@ -1,6 +1,6 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import "./BookForm.css";
-import { deleteBook } from "../services/booksApi";
+import { deleteBook } from "../../services/booksApi";
 
 export default function DeleteBook({ books, fetchBooks }) {
   const navigate = useNavigate();

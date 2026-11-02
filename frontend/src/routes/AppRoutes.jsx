@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import BookGrid from "../components/BookGrid";
-import SearchBar from "../components/SearchBar";
+import BookGrid from "../components/books/BookGrid";
+import SearchBar from "../components/books/SearchBar";
 import About from "../pages/About";
-import BookDetails from "../pages/BookDetails";
-import AddBook from "../pages/AddBook";
-import EditBook from "../pages/EditBook";
-import DeleteBook from "../pages/DeleteBook";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Logout from "../pages/Logout";
+import BookDetails from "../pages/books/BookDetails";
+import AddBook from "../pages/books/AddBook";
+import EditBook from "../pages/books/EditBook";
+import DeleteBook from "../pages/books/DeleteBook";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
+import Logout from "../pages/auth/Logout";
 
 export default function AppRoutes({
   location,

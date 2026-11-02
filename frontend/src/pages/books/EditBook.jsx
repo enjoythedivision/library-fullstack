@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./BookForm.css";
-import { editBook } from "../services/booksApi";
+import { editBook } from "../../services/booksApi";
 
 export default function EditBook({ books, fetchBooks }) {
   const navigate = useNavigate();
