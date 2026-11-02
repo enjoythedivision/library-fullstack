@@ -1,48 +1,37 @@
 import "./SearchBar.css";
 
-export default function SearchBar({searchTerm, setSearchTerm, availabilityFilter, setAvailabilityFilter}) {
+export default function SearchBar({ searchTerm, setSearchTerm, availabilityFilter, setAvailabilityFilter }) {
   return (
-    <div className="searchBar">
-      <div className="titleSearch">
+    <div className="catalog-toolbar">
+      <div className="catalog-search">
+        <label className="visually-hidden" htmlFor="book-search">Search books by title or author</label>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+          <path d="m16 16 4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
         <input
+          id="book-search"
           type="search"
-          placeholder="Search title or author..."
+          placeholder="Search by title or author"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(event) => setSearchTerm(event.target.value)}
         />
       </div>
-
-      <div className="availabilitySearch">
-        <input
-          type="radio"
-          id="all"
-          name="availability"
-          value="all"
-          checked={availabilityFilter === "all"}
-          onChange={(e) => setAvailabilityFilter(e.target.value)}
-        />
-        <label htmlFor="all">All</label>
-
-        <input
-          type="radio"
-          id="available"
-          name="availability"
-          value="available"
-          checked={availabilityFilter === "available"}
-          onChange={(e) => setAvailabilityFilter(e.target.value)}
-        />
-        <label htmlFor="available">Available</label>
-
-        <input
-          type="radio"
-          id="borrowed"
-          name="availability"
-          value="borrowed"
-          checked={availabilityFilter === "borrowed"}
-          onChange={(e) => setAvailabilityFilter(e.target.value)}
-        />
-        <label htmlFor="borrowed">Borrowed</label>
-      </div>
+      <fieldset className="availability-filters">
+        <legend className="visually-hidden">Filter by availability</legend>
+        {[['all', 'All books'], ['available', 'Available'], ['borrowed', 'Borrowed']].map(([value, label]) => (
+          <label className="availability-filter" key={value}>
+            <input
+              type="radio"
+              name="availability"
+              value={value}
+              checked={availabilityFilter === value}
+              onChange={(event) => setAvailabilityFilter(event.target.value)}
+            />
+            <span>{label}</span>
+          </label>
+        ))}
+      </fieldset>
     </div>
   );
 }

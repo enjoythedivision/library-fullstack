@@ -1,102 +1,145 @@
-.bookHero {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-
-  height: 300px;
-
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-  align-items: flex-end;
+.book-details-page {
+  padding: 1.5rem 0 5rem;
 }
 
-.bookHero .overlay {
-  width: 100%;
-  padding: 2rem 0;
-
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9),
-    rgba(0, 0, 0, 0.5),
-    transparent
-  );
-}
-
-.bookNav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  gap: 1rem;
-}
-
-.bookRight {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.bookSummary {
-  font-size: 1.4rem;
-  font-weight: 200;
-}
-
-.bookNav button {
+.book-details-back {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid #f0c75e;
-  border-radius: 10px;
-  background: #f0c75e;
-  color: #111111;
-  font-family: "Space Grotesk", sans-serif;
+  margin-bottom: 2.5rem;
+  color: var(--color-muted);
   font-size: 0.9rem;
-  font-weight: 600;
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease;
 }
 
-@media (max-width: 768px) {
-  .bookHero {
-    height: 260px;
-  }
-
-  .bookHero .overlay {
-    padding: 1.5rem 0;
-  }
-
-  .bookSummary {
-    font-size: 1.2rem;
-  }
-
-  .bookNav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .bookRight {
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
+.book-details-back:hover {
+  color: var(--color-accent);
 }
 
-@media (max-width: 480px) {
-  .bookHero {
-    height: 220px;
+.book-details-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.book-details-cover {
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.book-details-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.book-details-cover-fallback {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 1.5rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.book-availability {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.book-details-info > h1 {
+  margin: 0 0 0.65rem;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.book-details-author {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+}
+
+.book-details-loan {
+  margin-top: 1.75rem;
+}
+
+.book-details-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.book-details-loan .feedback {
+  margin-top: 1rem;
+}
+
+.book-details-description {
+  max-width: 65ch;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.book-details-description h2 {
+  margin-bottom: 0.85rem;
+  font-size: 1rem;
+}
+
+.book-details-description > p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+.book-details-management {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.book-details-empty {
+  padding: 4rem 0;
+}
+
+.book-details-empty h1 {
+  margin: 0.5rem 0;
+}
+
+.book-details-empty .button {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 680px) {
+  .book-details-page {
+    padding-top: 1rem;
   }
 
-  .bookSummary {
-    font-size: 1rem;
+  .book-details-back {
+    margin-bottom: 1.75rem;
   }
 
-  .bookNav button {
-    width: 100%;
+  .book-details-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .book-details-cover {
+    width: min(62vw, 260px);
+    justify-self: center;
+  }
+
+  .book-details-info > h1 {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .book-details-description {
+    margin-top: 2rem;
   }
 }

@@ -3,72 +3,103 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "./BookForm.css";
 import { editBook } from "../../services/booksApi";
 
-export default function EditBook({ books, fetchBooks }) {
-  const navigate = useNavigate();
+export default function EditBook({ books, booksLoading, booksError, fetchBooks }) {
   const { id } = useParams();
+  const bookToEdit = books.find((book) => book.id === Number(id));
 
-  const bookToEdit = books.find((b) => b.id === Number(id));
+  if (booksLoading && !bookToEdit) return <p className="page-note" role="status">Loading book…</p>;
+  if (!bookToEdit && booksError) return <p className="page-note">Book details could not be loaded.</p>;
+  if (!bookToEdit) {
+    return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
+  }
 
-  const [title, setTitle] = useState(bookToEdit.title);
-  const [author, setAuthor] = useState(bookToEdit.author);
-  const [description, setDescription] = useState(bookToEdit.description);
+  return <EditBookForm key={bookToEdit.id} book={bookToEdit} fetchBooks={fetchBooks} />;
+}
+
+function EditBookForm({ book, fetchBooks }) {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState(book.title);
+  const [author, setAuthor] = useState(book.author);
+  const [description, setDescription] = useState(book.description ?? "");
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleEdit(event) {
     event.preventDefault();
+    if (isSubmitting) return;
+    setError("");
+    setIsSubmitting(true);
 
-    const editedBook = {
-      ...bookToEdit,
-      title,
-      description,
-      author
-    };
-
-    const response = await editBook(id, editedBook);
-
-    if (response.ok) {
+    try {
+      const response = await editBook(book.id, {
+        ...book,
+        title: title.trim(),
+        author: author.trim(),
+        description,
+      });
+      if (!response.ok) {
+        setError(response.status === 403 || response.status === 401
+          ? "You need to be signed in as an admin to edit books."
+          : "We couldn't save your changes. Please try again.");
+        return;
+      }
       await fetchBooks();
-      alert("Book updated successfully.");
-      navigate(`/books/${id}`);
-    } else {
-      alert("Failed to edit book.");
+      navigate(`/books/${book.id}`, { state: { notice: "Book details updated." } });
+    } catch {
+      setError("Unable to connect. Please try again in a moment.");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   return (
-    <div className="form-page">
+    <section className="form-page" aria-labelledby="edit-book-title">
       <div className="form-card">
-        <h1 className="form-title">Edit book details</h1>
-        <form className="form-fields" onSubmit={handleEdit}>
-          <input
-            className="form-input"
-            type="text"
-            value={title}
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            className="form-input"
-            type="text"
-            value={author}
-            placeholder="Author"
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-          <textarea
-            className="form-textarea"
-            value={description}
-            placeholder="Book description..."
-            onChange={(e) => setDescription(e.target.value)}
-          />
+        <h1 id="edit-book-title" className="form-title">Edit book details</h1>
+        <form className="form-fields" onSubmit={handleEdit} aria-busy={isSubmitting}>
+          <div className="field">
+            <label className="field-label" htmlFor="edit-title">Title</label>
+            <input
+              id="edit-title"
+              name="title"
+              className="form-input"
+              type="text"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              required
+            />
+          </div>
+          <div className="field">
+            <label className="field-label" htmlFor="edit-author">Author</label>
+            <input
+              id="edit-author"
+              name="author"
+              className="form-input"
+              type="text"
+              value={author}
+              onChange={(event) => setAuthor(event.target.value)}
+              required
+            />
+          </div>
+          <div className="field">
+            <label className="field-label" htmlFor="edit-description">Description <span className="field-optional">(optional)</span></label>
+            <textarea
+              id="edit-description"
+              name="description"
+              className="form-textarea"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+            />
+          </div>
+          {error && <p className="feedback feedback-error" role="alert">{error}</p>}
           <div className="form-actions">
-            <button className="form-button" type="submit">
-              Save Changes
+            <button className="button button-primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Saving changes…" : "Save changes"}
             </button>
-            <Link className="action-button" to={`/books/${id}`}>
-              Cancel
-            </Link>
+            <Link className="button button-secondary" to={`/books/${book.id}`}>Cancel</Link>
           </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 }

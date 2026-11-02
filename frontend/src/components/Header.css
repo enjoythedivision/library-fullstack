@@ -1,73 +1,76 @@
-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    min-height: 90px;
-    padding: 1rem 0;
-}
-
-.left span {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-header nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+.site-header {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 100px;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.header-cta {
+.brand {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid #f0c75e;
-  border-radius: 10px;
-  background: #f0c75e;
-  color: #111111;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  letter-spacing: -0.055em;
 }
 
-.header-cta:hover {
-  background: #f7d77f;
-  border-color: #f7d77f;
-  transform: translateY(-1px);
+.brand-dot {
+  color: var(--color-accent);
 }
 
-.header-logout {
-  border-color: #d8564f;
-  background: transparent;
-  color: #f3aaa4;
+.site-header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.75rem;
 }
 
-.header-logout:hover {
-  border-color: #d8564f;
-  background: #d8564f;
-  color: #fff8ea;
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  transition: color 160ms ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--color-text);
+}
+
+.site-header .button {
+  min-height: 40px;
+  padding: 0.6rem 0.95rem;
+  font-size: 0.8rem;
+}
+
+.nav-account {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--color-border);
 }
 
 @media (max-width: 600px) {
-  header {
-    justify-content: center;
-    text-align: center;
+  .site-header {
+    min-height: 86px;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1.25rem 0;
   }
 
-  .left span {
-    width: 100%;
-    font-size: 1.05rem;
+  .site-header nav ul {
+    gap: 1.1rem;
   }
 
-  header nav ul {
-    justify-content: center;
-    gap: 1rem;
+  .brand {
+    font-size: 1.3rem;
+  }
+
+  .nav-account {
+    padding-left: 0;
+    border: 0;
   }
 }

@@ -1,94 +1,117 @@
-.searchBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.titleSearch input {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #e5e5e5;
-  color: #e5e5e5;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  width: 280px;
-  outline: none;
-}
-
-.titleSearch input::placeholder {
-  color: #777;
-}
-
-.titleSearch input:focus {
-  border-bottom: 1px solid #ffffff;
-}
-
-.availabilitySearch {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .titleSearch input {
-    width: 100%;
-  }
-
-  .availabilitySearch {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .searchBar {
-    gap: 1rem;
-  }
-
-  .availabilitySearch {
-    width: 100%;
-    justify-content: space-between;
-  }
-}
-
-.availabilitySearch input[type="radio"] {
-  display: none;
-}
-
-.availabilitySearch label {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  color: #999;
-  cursor: pointer;
-  position: relative;
-}
-
-.availabilitySearch input:checked + label {
-  color: #ffffff;
-}
-
-.availabilitySearch input:checked + label::after {
-  content: "";
+.visually-hidden {
   position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
+  width: 1px;
   height: 1px;
-  background: #ffffff;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.titleSearch input::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  appearance: none;
+.catalog-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--color-border);
+}
 
-  height: 14px;
-  width: 14px;
+.catalog-search {
+  display: flex;
+  flex: 1 1 260px;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 440px;
+  min-height: 46px;
+  padding: 0 0.9rem;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+}
 
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'><path d='M6 6l8 8M14 6l-8 8' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>") no-repeat center;
+.catalog-search:focus-within {
+  border-color: var(--color-accent);
+}
+
+.catalog-search svg {
+  flex-shrink: 0;
+}
+
+.catalog-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem 0;
+  border: 0;
+  outline: none;
+  color: var(--color-text);
+  background: transparent;
+  font-size: 0.85rem;
+}
+
+.catalog-search input::placeholder {
+  color: var(--color-muted);
+}
+
+.availability-filters {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.availability-filter {
+  position: relative;
   cursor: pointer;
+}
+
+.availability-filter input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.availability-filter span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 0;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.availability-filter:hover span {
+  color: var(--color-text);
+}
+
+.availability-filter input:checked + span {
+  color: var(--color-text);
+}
+
+.availability-filter input:focus-visible + span {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .catalog-search {
+    max-width: none;
+    flex-basis: 100%;
+  }
+
+  .availability-filters {
+    width: 100%;
+  }
+
+  .availability-filter {
+    flex: 1;
+  }
 }
