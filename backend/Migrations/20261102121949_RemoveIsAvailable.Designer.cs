@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryApi.Migrations
 {
-    [DbContext(typeof(LibraryContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20261102121949_RemoveIsAvailable")]
     partial class RemoveIsAvailable
     {

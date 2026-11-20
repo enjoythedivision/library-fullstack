@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraryApi.Data;
 
-public class LibraryContext : IdentityDbContext<IdentityUser>
+public class AppDbContext : IdentityDbContext<IdentityUser>
 {
-    public LibraryContext(DbContextOptions<LibraryContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }

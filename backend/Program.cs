@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<LibraryContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("LibraryConnection")
     )
@@ -18,7 +18,7 @@ builder.Services.AddDbContext<LibraryContext>(options =>
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<LibraryContext>();
+    .AddEntityFrameworkStores<AppDbContext>();
 
 
 builder.Services.AddCors(options =>
