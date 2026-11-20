@@ -31,22 +31,17 @@ function EditBookForm({ book, fetchBooks }) {
     setIsSubmitting(true);
 
     try {
-      const response = await editBook(book.id, {
+      await editBook(book.id, {
         ...book,
         title: title.trim(),
         author: author.trim(),
         description,
       });
-      if (!response.ok) {
-        setError(response.status === 403 || response.status === 401
-          ? "You need to be signed in as an admin to edit books."
-          : "We couldn't save your changes. Please try again.");
-        return;
-      }
+
       await fetchBooks();
       navigate(`/books/${book.id}`, { state: { notice: "Book details updated." } });
-    } catch {
-      setError("Unable to connect. Please try again in a moment.");
+    } catch (error) {
+      setError(error.message);
     } finally {
       setIsSubmitting(false);
     }

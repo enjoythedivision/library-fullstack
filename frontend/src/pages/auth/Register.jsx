@@ -17,17 +17,11 @@ export default function Register() {
     setIsSubmitting(true);
 
     try {
-      const response = await registerUser({ email, password });
-      if (!response.ok) {
-        const result = await response.json().catch(() => null);
-        setError(result?.errors
-          ? Object.values(result.errors).flat().join(" ")
-          : "We couldn't create your account. Check your details and try again.");
-        return;
-      }
+      await registerUser({ email, password });
+
       navigate("/login", { state: { notice: "Your account is ready. Sign in to start borrowing." } });
-    } catch {
-      setError("Unable to connect. Please try again in a moment.");
+    } catch (error) {
+      setError(error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -44,7 +38,7 @@ export default function Register() {
             <input
               id="register-email"
               name="email"
-              className="auth-input"
+              className="form-input"
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
@@ -58,7 +52,7 @@ export default function Register() {
             <input
               id="register-password"
               name="password"
-              className="auth-input"
+              className="form-input"
               type="password"
               autoComplete="new-password"
               value={password}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { logoutUser } from "../../services/authApi";
+import "./Auth.css";
 import "./Logout.css";
 
 export default function Logout({ setUser, fetchBooks }) {
@@ -14,30 +15,24 @@ export default function Logout({ setUser, fetchBooks }) {
     setIsSubmitting(true);
 
     try {
-      const response = await logoutUser();
-      if (!response.ok) {
-        setError("We couldn't sign you out. Please try again.");
-        return;
-      }
+      await logoutUser();
 
       setUser(null);
-      let notice = "You're signed out. You can still browse the collection.";
-      try {
-        await fetchBooks();
-      } catch {
-        notice = "You're signed out. Please reload the page to refresh the collection.";
-      }
+      const refreshed = await fetchBooks();
+      const notice = refreshed
+        ? "You're signed out. You can still browse the collection."
+        : "You're signed out. Please reload the page to refresh the collection.";
       navigate("/", { state: { notice } });
-    } catch {
-      setError("Unable to connect. Please try again in a moment.");
+    } catch (error) {
+      setError(error.message);
     } finally {
       setIsSubmitting(false);
     }
   }
 
   return (
-    <section className="logout-page">
-      <div className="logout-card">
+    <section className="auth-page">
+      <div className="auth-card">
         <h1 className="logout-title">Sign out</h1>
         <p className="logout-text">Are you sure you want to sign out?</p>
         {error && <p className="feedback feedback-error">{error}</p>}

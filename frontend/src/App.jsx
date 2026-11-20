@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -13,32 +13,15 @@ function App() {
   const [books, setBooks] = useState([]);
   const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
   const reducedMotion = useReducedMotion();
-
-  const filteredBooks = books.filter((book) => {
-    const searchMatch =
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const availabilityMatch =
-      availabilityFilter === "all" ||
-      (availabilityFilter === "available" && !book.borrowedByUserId) ||
-      (availabilityFilter === "borrowed" && book.borrowedByUserId);
-
-    return searchMatch && availabilityMatch;
-  });
 
   const fetchBooks = async () => {
     setBooksLoading(true);
     setBooksError("");
     try {
-      const response = await getBooks();
-      if (!response.ok) throw new Error("Failed to load books.");
-      setBooks(await response.json());
+      setBooks(await getBooks());
       return true;
     } catch {
       setBooksError("We couldn't refresh the collection. Please try again.");
@@ -50,73 +33,49 @@ function App() {
 
   async function handleBorrow(bookId) {
     try {
-      const response = await borrowBook(bookId);
-      if (!response.ok) {
-        if (response.status === 400 || response.status === 409) {
-          await fetchBooks();
-          return { ok: false, message: "Another reader has already borrowed this book." };
-        }
-        return { ok: false, message: response.status === 401
-          ? "Your session has expired. Please sign in again."
-          : "We couldn't borrow this book. Please try again." };
-      }
+      await borrowBook(bookId);
       const refreshed = await fetchBooks();
       return { ok: true, message: refreshed
         ? "Book borrowed successfully."
         : "Book borrowed. Reload the collection to see the latest status." };
-    } catch {
-      return { ok: false, message: "Unable to connect. Please try again in a moment." };
+    } catch (error) {
+      await fetchBooks();
+      return { ok: false, message: error.message };
     }
   }
 
   async function handleReturn(bookId) {
     try {
-      const response = await returnBook(bookId);
-      if (!response.ok) {
-        if (response.status === 403) {
-          await fetchBooks();
-          return { ok: false, message: "You can only return books borrowed by your account." };
-        }
-        return { ok: false, message: response.status === 401
-          ? "Your session has expired. Please sign in again."
-          : "We couldn't return this book. Please try again." };
-      }
+      await returnBook(bookId);
       const refreshed = await fetchBooks();
       return { ok: true, message: refreshed
         ? "Book returned successfully."
         : "Book returned. Reload the collection to see the latest status." };
-    } catch {
-      return { ok: false, message: "Unable to connect. Please try again in a moment." };
+    } catch (error) {
+      await fetchBooks();
+      return { ok: false, message: error.message };
     }
   }
 
   async function fetchCurrentUser() {
-    const response = await getCurrentUser();
-
-    if (response.ok) {
-      const data = await response.json();
-      setUser(data);
-    } else {
+    try {
+      setUser(await getCurrentUser());
+    } catch {
       setUser(null);
     }
   }
 
   async function checkIsAdmin() {
-    const response = await getAdminStatus();
-
-    if (response.ok) {
-      const data = await response.json();
+    try {
+      const data = await getAdminStatus();
       setIsAdmin(data.isAdmin);
-    } else {
+    } catch {
       setIsAdmin(false);
     }
   }
 
   useEffect(() => {
     fetchBooks();
-  }, []);
-
-  useEffect(() => {
     fetchCurrentUser();
   }, []);
 
@@ -159,13 +118,8 @@ function App() {
             books={books}
             booksLoading={booksLoading}
             booksError={booksError}
-            filteredBooks={filteredBooks}
             user={user}
             isAdmin={isAdmin}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            availabilityFilter={availabilityFilter}
-            setAvailabilityFilter={setAvailabilityFilter}
             handleBorrow={handleBorrow}
             handleReturn={handleReturn}
             fetchBooks={fetchBooks}

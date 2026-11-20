@@ -24,31 +24,6 @@
   margin-top: 2rem;
 }
 
-.auth-input {
-  width: 100%;
-  min-height: 48px;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font: inherit;
-  transition: border-color 0.2s ease;
-}
-
-.auth-input::placeholder {
-  color: var(--color-muted);
-  opacity: 0.7;
-}
-
-.auth-input:hover {
-  border-color: var(--color-muted);
-}
-
-.auth-input:focus-visible {
-  border-color: var(--color-accent);
-}
-
 .auth-submit {
   width: 100%;
   margin-top: 0.25rem;

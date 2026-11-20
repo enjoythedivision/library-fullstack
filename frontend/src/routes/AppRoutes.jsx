@@ -14,13 +14,8 @@ export default function AppRoutes({
   books,
   booksLoading,
   booksError,
-  filteredBooks,
   user,
   isAdmin,
-  searchTerm,
-  setSearchTerm,
-  availabilityFilter,
-  setAvailabilityFilter,
   handleBorrow,
   handleReturn,
   fetchBooks,
@@ -36,12 +31,7 @@ export default function AppRoutes({
             books={books}
             booksLoading={booksLoading}
             booksError={booksError}
-            filteredBooks={filteredBooks}
             user={user}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            availabilityFilter={availabilityFilter}
-            setAvailabilityFilter={setAvailabilityFilter}
           />
         }
       />

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BookGrid from "../components/books/BookGrid";
 import SearchBar from "../components/books/SearchBar";
 
@@ -5,13 +6,25 @@ export default function Home({
   books,
   booksLoading,
   booksError,
-  filteredBooks,
   user,
-  searchTerm,
-  setSearchTerm,
-  availabilityFilter,
-  setAvailabilityFilter,
 }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [availabilityFilter, setAvailabilityFilter] = useState("all");
+
+  const normalizedSearchTerm = searchTerm.toLowerCase();
+  const filteredBooks = books.filter((book) => {
+    const searchMatch =
+      book.title.toLowerCase().includes(normalizedSearchTerm) ||
+      book.author.toLowerCase().includes(normalizedSearchTerm);
+
+    const availabilityMatch =
+      availabilityFilter === "all" ||
+      (availabilityFilter === "available" && !book.borrowedByUserId) ||
+      (availabilityFilter === "borrowed" && book.borrowedByUserId);
+
+    return searchMatch && availabilityMatch;
+  });
+
   return (
     <section>
       <div className="catalog-intro">

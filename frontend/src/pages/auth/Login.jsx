@@ -17,22 +17,20 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
     setIsSubmitting(true);
 
     try {
-      const response = await loginUser({ email, password });
-      if (!response.ok) {
-        setError("Check your email and password and try again.");
-        return;
-      }
+      await loginUser({ email, password });
 
       let notice = "Signed in successfully.";
       try {
         await fetchCurrentUser();
-        await fetchBooks();
+        if (!await fetchBooks()) {
+          notice = "You're signed in, but the library could not refresh. Please reload the page.";
+        }
       } catch {
         notice = "You're signed in, but the library could not refresh. Please reload the page.";
       }
       navigate("/", { state: { notice } });
-    } catch {
-      setError("Unable to connect. Please try again in a moment.");
+    } catch (error) {
+      setError(error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -49,7 +47,7 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
             <input
               id="login-email"
               name="email"
-              className="auth-input"
+              className="form-input"
               type="email"
               autoComplete="username"
               placeholder="you@example.com"
@@ -63,7 +61,7 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
             <input
               id="login-password"
               name="password"
-              className="auth-input"
+              className="form-input"
               type="password"
               autoComplete="current-password"
               value={password}

@@ -18,17 +18,12 @@ export default function AddBook({ fetchBooks }) {
     setIsSubmitting(true);
 
     try {
-      const response = await addBook({ title: title.trim(), author: author.trim(), description });
-      if (!response.ok) {
-        setError(response.status === 403 || response.status === 401
-          ? "You need to be signed in as an admin to add books."
-          : "We couldn't add this book. Please check the details and try again.");
-        return;
-      }
+      await addBook({ title: title.trim(), author: author.trim(), description });
+
       await fetchBooks();
       navigate("/", { state: { notice: "Book added to the collection." } });
-    } catch {
-      setError("Unable to connect. Please try again in a moment.");
+    } catch (error) {
+      setError(error.message);
     } finally {
       setIsSubmitting(false);
     }

@@ -22,17 +22,12 @@ export default function DeleteBook({ books, booksLoading, booksError, fetchBooks
     setIsSubmitting(true);
 
     try {
-      const response = await deleteBook(id);
-      if (!response.ok) {
-        setError(response.status === 403 || response.status === 401
-          ? "You need to be signed in as an admin to delete books."
-          : "We couldn't delete this book. Please try again.");
-        return;
-      }
+      await deleteBook(id);
+
       await fetchBooks();
       navigate("/", { state: { notice: "Book removed from the collection." } });
-    } catch {
-      setError("Unable to connect. Please try again in a moment.");
+    } catch (error) {
+      setError(error.message);
     } finally {
       setIsSubmitting(false);
     }
