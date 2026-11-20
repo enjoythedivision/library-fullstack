@@ -28,11 +28,11 @@ export default function Register() {
   }
 
   return (
-    <section className="auth-page">
-      <div className="auth-card">
-        <h1 className="auth-title">Create account</h1>
+    <section className="form-page">
+      <div className="form-card auth-card">
+        <h1 className="form-title">Create account</h1>
         <p className="page-note">Create an account to borrow books.</p>
-        <form className="auth-form" onSubmit={handleRegister}>
+        <form className="form-fields" onSubmit={handleRegister}>
           <div className="field">
             <label className="field-label" htmlFor="register-email">Email address</label>
             <input

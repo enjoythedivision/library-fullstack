@@ -37,11 +37,11 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
   }
 
   return (
-    <section className="auth-page">
-      <div className="auth-card">
-        <h1 className="auth-title">Sign in</h1>
+    <section className="form-page">
+      <div className="form-card auth-card">
+        <h1 className="form-title">Sign in</h1>
         <p className="page-note">Sign in to borrow and return books.</p>
-        <form className="auth-form" onSubmit={handleLogin}>
+        <form className="form-fields" onSubmit={handleLogin}>
           <div className="field">
             <label className="field-label" htmlFor="login-email">Email address</label>
             <input

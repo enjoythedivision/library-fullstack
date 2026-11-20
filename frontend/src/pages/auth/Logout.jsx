@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { logoutUser } from "../../services/authApi";
 import "./Auth.css";
-import "./Logout.css";
 
 export default function Logout({ setUser, fetchBooks }) {
   const [error, setError] = useState("");
@@ -31,9 +30,9 @@ export default function Logout({ setUser, fetchBooks }) {
   }
 
   return (
-    <section className="auth-page">
-      <div className="auth-card">
-        <h1 className="logout-title">Sign out</h1>
+    <section className="form-page">
+      <div className="form-card auth-card">
+        <h1 className="form-title">Sign out</h1>
         <p className="logout-text">Are you sure you want to sign out?</p>
         {error && <p className="feedback feedback-error">{error}</p>}
         <div className="logout-actions">

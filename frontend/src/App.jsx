@@ -88,7 +88,7 @@ function App() {
   }, [user]);
 
   return (
-    <div className="container">
+    <div>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header user={user} isAdmin={isAdmin} />
 

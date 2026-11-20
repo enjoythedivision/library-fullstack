@@ -25,7 +25,6 @@
 }
 
 .nav-link {
-  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -38,14 +37,9 @@
   color: var(--color-text);
 }
 
-.nav-link.active {
-  color: var(--color-text);
-}
-
 .site-header .button {
   min-height: 40px;
   padding: 0.6rem 0.95rem;
-  font-size: 0.9rem;
 }
 
 .nav-account {
