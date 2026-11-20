@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
-import About from "../pages/About";
 import BookDetails from "../pages/books/BookDetails";
 import AddBook from "../pages/books/AddBook";
 import EditBook from "../pages/books/EditBook";
@@ -35,7 +34,6 @@ export default function AppRoutes({
           />
         }
       />
-      <Route path="/about" element={<About />} />
       <Route
         path="/books/:id"
         element={

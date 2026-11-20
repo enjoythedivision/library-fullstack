@@ -33,7 +33,7 @@ Within `frontend/src`:
 - `components/`: the shared header and its styles.
 - `pages/books/`: book details and add, edit, and delete pages.
 - `pages/auth/`: login, registration, and logout pages.
-- `pages/`: the About page.
+- `pages/`: the home page.
 - `services/`: API requests and the shared API URL.
 - `routes/`: route definitions.
 - `App.jsx`: shared state and application layout.
