@@ -9,7 +9,6 @@ export default function Header({ user, isAdmin }) {
       </Link>
       <nav>
         <ul>
-          <li><NavLink to="/" end className="nav-link">Books</NavLink></li>
           {user ? (
             <>
               {isAdmin && (
