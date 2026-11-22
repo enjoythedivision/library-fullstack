@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using LibraryApi.Hubs;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -11,13 +13,17 @@ public class BooksController : ControllerBase
 {
     private readonly AppDbContext _context;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly IHubContext<NotificationsHub> _hubContext;
+
 
     public BooksController(
         AppDbContext context,
-        UserManager<IdentityUser> userManager)
+        UserManager<IdentityUser> userManager, 
+        IHubContext<NotificationsHub> hubContext)
     {
         _context = context;
         _userManager = userManager;
+        _hubContext = hubContext;
     }
 
     [HttpGet]
