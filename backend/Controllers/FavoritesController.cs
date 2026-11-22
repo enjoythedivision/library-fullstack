@@ -75,4 +75,30 @@ public class FavoritesController : ControllerBase
         await _context.SaveChangesAsync();
         return NoContent();
     }
+
+    [HttpDelete("{bookId}")]
+    public async Task<IActionResult> Unfavorite(int bookId)
+    {
+        var currentUser = await _userManager.GetUserAsync(User);
+
+        if (currentUser is null)
+        {
+            return Unauthorized();
+        }
+
+        var favorite = await _context.Favorites
+            .FirstOrDefaultAsync(favorite =>
+                favorite.UserId == currentUser.Id &&
+                favorite.BookId == bookId);
+
+        if (favorite is null)
+        {
+            return NotFound("This book is not in your favorites list.");
+        }
+
+        _context.Favorites.Remove(favorite);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }
