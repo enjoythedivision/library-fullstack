@@ -1,4 +1,5 @@
 using LibraryApi.Data;
+using LibraryApi.Hubs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(
@@ -96,5 +99,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapIdentityApi<IdentityUser>();
+
+app.MapHub<NotificationsHub>("/Notifications");
 
 app.Run();
