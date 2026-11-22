@@ -53,7 +53,7 @@ public class BooksController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutBook(int? id, Book book)
+    public async Task<IActionResult> PutBook(int id, Book book)
     {
         if (id != book.Id)
         {
@@ -88,7 +88,7 @@ public class BooksController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteBook(int? id)
+    public async Task<IActionResult> DeleteBook(int id)
     {
         var book = await _context.Books.FindAsync(id);
         if (book == null)
