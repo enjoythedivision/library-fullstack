@@ -73,6 +73,6 @@ public class FavoritesController : ControllerBase
         });
 
         await _context.SaveChangesAsync();
-        return CreatedAtAction();
+        return NoContent();
     }
 }
