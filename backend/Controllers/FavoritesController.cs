@@ -21,7 +21,6 @@ public class FavoritesController : ControllerBase
         _userManager = userManager;
     }
 
-    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetFavouriteBooks()
     {
