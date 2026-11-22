@@ -14,4 +14,6 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Book> Books { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
+
+    
 }

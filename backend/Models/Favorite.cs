@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryApi.Models;
 
+[Index(nameof(UserId), nameof(BookId), IsUnique = true)]
 public class Favorite
 {
     public int Id { get; set; }
