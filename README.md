@@ -76,3 +76,21 @@ To test behavior between two users, sign in as Reader 1 in a normal browser
 window and Reader 2 in a private/incognito window. Each developer's local
 database is independent; registering on one machine does not create accounts
 on another. These public credentials are intended only for local testing.
+
+#### Local Admin account
+
+The following account has already been created and assigned the `Admin` role
+in the current `backend/library.db`:
+
+| Email | Password |
+| --- | --- |
+| localadmin@example.com | LibraryAdmin2026! |
+
+Open [Login](http://localhost:5173/login) and use these credentials to test
+adding, editing, and deleting books. The previous `testadmin@example.com`
+account has been deleted.
+
+This account exists in the supplied database; it is not created automatically
+at startup. A fresh or replacement database needs its own Admin account and
+role assignment. Registering this email alone does not grant Admin privileges.
+Use these public credentials only for local testing.
