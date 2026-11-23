@@ -77,6 +77,13 @@
   margin-top: 1rem;
 }
 
+.book-favorite-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.85rem;
+}
+
 .book-details-description {
   margin-top: 2.5rem;
   padding-top: 1.75rem;

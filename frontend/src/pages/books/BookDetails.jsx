@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 import "./BookDetails.css";
 
 export default function BookDetails({
@@ -99,6 +100,14 @@ export default function BookDetails({
               ) : (
                 <p className="page-note">Borrowed by another user.</p>
               )}
+              <button
+                type="button"
+                className="button button-secondary book-favorite-button"
+                aria-label="Add to favorites"
+                title="Add to favorites"
+              >
+                <Heart size={22} strokeWidth={1.8} aria-hidden="true" />
+              </button>
             </div>
 
             {feedback && (
