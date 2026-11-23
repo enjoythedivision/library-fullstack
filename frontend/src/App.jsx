@@ -153,6 +153,19 @@ function App() {
     <div>
       <Header user={user} isAdmin={isAdmin} />
 
+      {notification && (
+        <div className="notification-toast" role="status">
+          <p>{notification}</p>
+          <button
+            type="button"
+            aria-label="Close notification"
+            onClick={() => setNotification("")}
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       <AnimatePresence mode="wait">
         <motion.main
           id="main-content"
