@@ -15,6 +15,7 @@ import { API_URL } from "./services/apiConfig";
 
 function App() {
   const [user, setUser] = useState(undefined);
+  const [notification, setNotification] = useState("");
   const [books, setBooks] = useState([]);
   const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
@@ -126,7 +127,7 @@ function App() {
       .withUrl(`${API_URL}/Notifications`)
       .withAutomaticReconnect([0, 0, 10000])
       .build();
-      
+
     async function start() {
       try {
         await connection.start();
@@ -135,6 +136,10 @@ function App() {
         console.log(err);
       }
     }
+
+    connection.on("BookAvailable", book => {
+      setNotification(`Your favorite book ${book.title} is available again.`);
+    });
 
     // Start the connection.
     start();
