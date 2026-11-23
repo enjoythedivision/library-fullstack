@@ -25,7 +25,7 @@ export default function DeleteBook({ books, booksLoading, booksError, refreshBoo
       await deleteBook(id);
 
       await refreshBooks();
-      navigate("/", { state: { notice: "Book removed from the collection." } });
+      navigate("/");
     } catch (error) {
       setError(error.message);
     } finally {

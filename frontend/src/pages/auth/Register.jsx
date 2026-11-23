@@ -19,7 +19,7 @@ export default function Register() {
     try {
       await registerUser({ email, password });
 
-      navigate("/login", { state: { notice: "Your account is ready. Sign in to start borrowing." } });
+      navigate("/login");
     } catch (error) {
       setError(error.message);
     } finally {

@@ -39,7 +39,7 @@ function EditBookForm({ book, refreshBooks }) {
       });
 
       await refreshBooks();
-      navigate(`/books/${book.id}`, { state: { notice: "Book details updated." } });
+      navigate(`/books/${book.id}`);
     } catch (error) {
       setError(error.message);
     } finally {

@@ -21,7 +21,7 @@ export default function Login({ fetchCurrentUser, refreshBooks }) {
 
       await fetchCurrentUser();
       await refreshBooks();
-      navigate("/", { state: { notice: "Signed in successfully." } });
+      navigate("/");
     } catch (error) {
       setError(error.message);
     } finally {

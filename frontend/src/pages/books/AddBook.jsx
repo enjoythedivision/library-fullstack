@@ -21,7 +21,7 @@ export default function AddBook({ refreshBooks }) {
       await addBook({ title: title.trim(), author: author.trim(), description });
 
       await refreshBooks();
-      navigate("/", { state: { notice: "Book added to the collection." } });
+      navigate("/");
     } catch (error) {
       setError(error.message);
     } finally {

@@ -239,16 +239,6 @@ main {
   background: #b84c370c;
 }
 
-.feedback-success {
-  color: var(--color-success);
-  border-color: #91af7f55;
-  background: #91af7f0a;
-}
-
-.route-notice {
-  margin: 1.5rem 0;
-}
-
 .collection-error {
   display: flex;
   flex-wrap: wrap;

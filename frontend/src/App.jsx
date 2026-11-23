@@ -131,11 +131,6 @@ function App() {
           exit={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
           transition={{ duration: reducedMotion ? 0 : 0.35 }}
         >
-          {location.state?.notice && (
-            <p className="feedback feedback-success route-notice">
-              {location.state.notice}
-            </p>
-          )}
           {favoritesError && (
             <p className="feedback feedback-error" role="alert">
               {favoritesError}

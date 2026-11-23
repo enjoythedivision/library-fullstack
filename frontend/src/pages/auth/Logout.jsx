@@ -19,9 +19,7 @@ export default function Logout({ setUser, setFavorites, refreshBooks }) {
       setUser(null);
       setFavorites([]);
       await refreshBooks();
-      navigate("/", {
-        state: { notice: "You're signed out. You can still browse the collection." },
-      });
+      navigate("/");
     } catch (error) {
       setError(error.message);
     } finally {
