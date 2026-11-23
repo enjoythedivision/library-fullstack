@@ -190,13 +190,6 @@ function App() {
           {booksError && (
             <div className="feedback feedback-error collection-error">
               <p>{booksError}</p>
-              <button
-                className="button button-secondary"
-                onClick={refreshBooks}
-                disabled={booksLoading}
-              >
-                {booksLoading ? "Refreshing…" : "Try again"}
-              </button>
             </div>
           )}
           <AppRoutes
