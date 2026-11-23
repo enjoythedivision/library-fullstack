@@ -3,11 +3,10 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "./BookForm.css";
 import { editBook } from "../../services/booksApi";
 
-export default function EditBook({ books, booksLoading, booksError, refreshBooks }) {
+export default function EditBook({ books, booksError, refreshBooks }) {
   const { id } = useParams();
   const bookToEdit = books.find((book) => book.id === Number(id));
 
-  if (booksLoading && !bookToEdit) return <p className="page-note">Loading book…</p>;
   if (!bookToEdit && booksError) return <p className="page-note">Book details could not be loaded.</p>;
   if (!bookToEdit) {
     return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
@@ -87,7 +86,7 @@ function EditBookForm({ book, refreshBooks }) {
           {error && <p className="feedback feedback-error">{error}</p>}
           <div className="form-actions">
             <button className="button button-primary" disabled={isSubmitting}>
-              {isSubmitting ? "Saving changes…" : "Save changes"}
+              Save changes
             </button>
             <Link className="button button-secondary" to={`/books/${book.id}`}>Cancel</Link>
           </div>

@@ -17,7 +17,6 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [notification, setNotification] = useState(null);
   const [books, setBooks] = useState([]);
-  const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [favorites, setFavorites] = useState([]);
@@ -26,15 +25,12 @@ function App() {
   const reducedMotion = useReducedMotion();
 
   async function refreshBooks() {
-    setBooksLoading(true);
     setBooksError("");
 
     try {
       setBooks(await getBooks());
     } catch {
       setBooksError("We couldn't refresh the collection. Please try again.");
-    } finally {
-      setBooksLoading(false);
     }
   }
 
@@ -182,23 +178,13 @@ function App() {
           exit={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
           transition={{ duration: reducedMotion ? 0 : 0.35 }}
         >
-          {favoritesError && (
-            <p className="feedback feedback-error" role="alert">
-              {favoritesError}
-            </p>
-          )}
-          {booksError && (
-            <div className="feedback feedback-error collection-error">
-              <p>{booksError}</p>
-            </div>
-          )}
           <AppRoutes
+            favoritesError={favoritesError}
             favorites={favorites}
             handleAddFavorite={handleAddFavorite}
             handleRemoveFavorite={handleRemoveFavorite}
             location={location}
             books={books}
-            booksLoading={booksLoading}
             booksError={booksError}
             user={user}
             isAdmin={isAdmin}

@@ -66,7 +66,7 @@ export default function Register() {
           </div>
           {error && <p className="feedback feedback-error">{error}</p>}
           <button className="button button-primary auth-submit" disabled={isSubmitting}>
-            {isSubmitting ? "Creating account…" : "Create account"}
+            Create account
           </button>
         </form>
         <p className="auth-footer">

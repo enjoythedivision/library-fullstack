@@ -2,12 +2,7 @@ import { useState } from "react";
 import BookGrid from "../components/books/BookGrid";
 import SearchBar from "../components/books/SearchBar";
 
-export default function Home({
-  books,
-  booksLoading,
-  booksError,
-  user,
-}) {
+export default function Home({ books, booksError, user }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
 
@@ -34,9 +29,7 @@ export default function Home({
             Browse titles, check availability, and borrow a book.
           </p>
         </div>
-        {!booksLoading && (
-          <p className="catalog-total">{books.length} books on the shelf</p>
-        )}
+        <p className="catalog-total">{books.length} books</p>
       </div>
       <SearchBar
         searchTerm={searchTerm}
@@ -44,29 +37,10 @@ export default function Home({
         availabilityFilter={availabilityFilter}
         setAvailabilityFilter={setAvailabilityFilter}
       />
-      <div className="catalog-results">
-        <p>
-          {booksLoading
-            ? "Refreshing the collection…"
-            : `Showing ${filteredBooks.length} of ${books.length} books`}
-        </p>
-      </div>
-      {booksLoading && books.length === 0 ? (
-        <p className="loading-state">Loading books…</p>
-      ) : booksError && books.length === 0 ? (
-        <div className="empty-state">
-          <h2>Books couldn't load.</h2>
-          <p className="page-note">Use the retry button above to reconnect.</p>
-        </div>
+      {booksError && books.length === 0 ? (
+        <p className="empty-state page-note">Books couldn't load.</p>
       ) : filteredBooks.length === 0 ? (
-        <div className="empty-state">
-          <h2>{books.length === 0 ? "No books yet." : "No books found."}</h2>
-          <p className="page-note">
-            {books.length === 0
-              ? "New additions will appear here."
-              : "Try a different title, author, or availability filter."}
-          </p>
-        </div>
+        <p className="empty-state page-note">No books found.</p>
       ) : (
         <BookGrid books={filteredBooks} user={user} />
       )}

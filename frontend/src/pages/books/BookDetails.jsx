@@ -4,11 +4,12 @@ import { Heart } from "lucide-react";
 import "./BookDetails.css";
 
 export default function BookDetails({
+  favoritesError,
   favorites,
   handleAddFavorite,
   handleRemoveFavorite,
   books,
-  booksLoading,
+
   booksError,
   user,
   handleBorrow,
@@ -21,8 +22,6 @@ export default function BookDetails({
   const [failedImageUrl, setFailedImageUrl] = useState(null);
   const book = books.find((book) => book.id === Number(id));
 
-  if (!book && booksLoading)
-    return <p className="page-note">Loading this book...</p>;
   if (!book && booksError)
     return (
       <p className="page-note">Unable to load this book. Please try again.</p>
@@ -108,7 +107,7 @@ export default function BookDetails({
                   onClick={() => handleLoanAction("return")}
                   disabled={Boolean(pendingAction)}
                 >
-                  {pendingAction ? "Updating loan..." : "Return book"}
+                  Return book
                 </button>
               ) : !isBorrowed ? (
                 <button
@@ -116,7 +115,7 @@ export default function BookDetails({
                   onClick={() => handleLoanAction("borrow")}
                   disabled={Boolean(pendingAction)}
                 >
-                  {pendingAction ? "Updating loan..." : "Borrow book"}
+                  Borrow book
                 </button>
               ) : (
                 <p className="page-note">Borrowed by another user.</p>
@@ -140,8 +139,10 @@ export default function BookDetails({
               </button>
             </div>
 
-            {actionError && (
-              <p className="feedback feedback-error">{actionError}</p>
+            {(actionError || favoritesError) && (
+              <p className="feedback feedback-error" role="alert">
+                {actionError || favoritesError}
+              </p>
             )}
           </div>
 

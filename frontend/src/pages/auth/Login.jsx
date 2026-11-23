@@ -64,7 +64,7 @@ export default function Login({ fetchCurrentUser, refreshBooks }) {
           </div>
           {error && <p className="feedback feedback-error">{error}</p>}
           <button className="button button-primary auth-submit" disabled={isSubmitting}>
-            {isSubmitting ? "Signing in…" : "Sign in"}
+            Sign in
           </button>
         </form>
         <p className="auth-footer">

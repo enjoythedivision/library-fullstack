@@ -72,7 +72,7 @@ export default function AddBook({ refreshBooks }) {
           {error && <p className="feedback feedback-error">{error}</p>}
           <div className="form-actions">
             <button className="button button-primary" disabled={isSubmitting}>
-              {isSubmitting ? "Adding book…" : "Add book"}
+              Add book
             </button>
             <Link className="button button-secondary" to="/">Cancel</Link>
           </div>

@@ -35,7 +35,7 @@ export default function Logout({ setUser, setFavorites, refreshBooks }) {
         {error && <p className="feedback feedback-error">{error}</p>}
         <div className="logout-actions">
           <button className="button button-primary" onClick={handleLogout} disabled={isSubmitting}>
-            {isSubmitting ? "Signing out…" : "Sign out"}
+            Sign out
           </button>
           <Link className="button button-secondary" to="/">Cancel</Link>
         </div>

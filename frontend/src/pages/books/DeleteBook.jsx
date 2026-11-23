@@ -3,14 +3,13 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import "./BookForm.css";
 import { deleteBook } from "../../services/booksApi";
 
-export default function DeleteBook({ books, booksLoading, booksError, refreshBooks }) {
+export default function DeleteBook({ books, booksError, refreshBooks }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const bookToDelete = books.find((book) => book.id === Number(id));
 
-  if (booksLoading && !bookToDelete) return <p className="page-note">Loading book…</p>;
   if (!bookToDelete && booksError) return <p className="page-note">Book details could not be loaded.</p>;
   if (!bookToDelete) {
     return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
@@ -43,7 +42,7 @@ export default function DeleteBook({ books, booksLoading, booksError, refreshBoo
         {error && <p className="feedback feedback-error">{error}</p>}
         <div className="form-actions">
           <button className="button button-danger" onClick={handleDelete} disabled={isSubmitting}>
-            {isSubmitting ? "Removing book…" : "Delete book"}
+            Delete book
           </button>
           <Link className="button button-secondary" to={`/books/${id}`}>Cancel</Link>
         </div>

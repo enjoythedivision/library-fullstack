@@ -1,9 +1,14 @@
-export default function Favorites({ favorites, handleRemoveFavorite}) {
+export default function Favorites({ favorites, favoritesError, handleRemoveFavorite }) {
   return (
     <section className="favorites-page">
       <h1>My favorites</h1>
 
+      {favoritesError && (
+        <p className="feedback feedback-error" role="alert">{favoritesError}</p>
+      )}
+
       {favorites.length === 0 ? (
+        !favoritesError &&
         <p className="page-note">Your favorites is empty.</p>
       ) : (
         <div>
