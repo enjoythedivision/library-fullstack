@@ -22,19 +22,27 @@ export default function BookDetails({
   const [failedImageUrl, setFailedImageUrl] = useState(null);
   const book = books.find((book) => book.id === Number(id));
 
-  if (!book && booksLoading) return <p className="page-note">Loading this book...</p>;
-  if (!book && booksError) return <p className="page-note">Unable to load this book. Please try again.</p>;
+  if (!book && booksLoading)
+    return <p className="page-note">Loading this book...</p>;
+  if (!book && booksError)
+    return (
+      <p className="page-note">Unable to load this book. Please try again.</p>
+    );
   if (!book) {
     return (
       <section className="book-details-empty">
         <h1>Book not found</h1>
-        <p className="page-note">This book may have been removed from the library.</p>
-        <Link className="button button-secondary" to="/">Back to books</Link>
+        <p className="page-note">
+          This book may have been removed from the library.
+        </p>
+        <Link className="button button-secondary" to="/">
+          Back to books
+        </Link>
       </section>
     );
   }
 
-  const isFavorite = favorites.some(f=>f.id === book.id);
+  const isFavorite = favorites.some((f) => f.id === book.id);
   const isBorrowed = Boolean(book.borrowedByUserId);
   const isBorrowedByMe = Boolean(user && book.isBorrowedByMe);
   const statusText = isBorrowedByMe
@@ -58,7 +66,9 @@ export default function BookDetails({
         setMessage("Book returned successfully.");
       }
     } catch (error) {
-      setActionError(error.message || "We couldn't update this loan. Please try again.");
+      setActionError(
+        error.message || "We couldn't update this loan. Please try again.",
+      );
     } finally {
       setPendingAction(null);
     }
@@ -66,7 +76,9 @@ export default function BookDetails({
 
   return (
     <section className="book-details-page">
-      <Link className="book-details-back" to="/">← Back to books</Link>
+      <Link className="book-details-back" to="/">
+        ← Back to books
+      </Link>
 
       <div className="book-details-layout">
         <div className="book-details-cover">
@@ -91,7 +103,9 @@ export default function BookDetails({
           <div className="book-details-loan">
             <div className="book-details-actions">
               {!user ? (
-                <Link className="button button-primary" to="/login">Log in to borrow</Link>
+                <Link className="button button-primary" to="/login">
+                  Log in to borrow
+                </Link>
               ) : isBorrowedByMe ? (
                 <button
                   className="button button-primary"
@@ -116,15 +130,24 @@ export default function BookDetails({
                 className="button button-secondary book-favorite-button"
                 aria-label="Add to favorites"
                 title="Add to favorites"
+                onClick={async () => {
+                  try {
+                    if (isFavorite) {
+                      await handleRemoveFavorite(book.id);
+                    } else {
+                      await handleAddFavorite(book.id);
+                    }
+                  } catch (error) {
+                    setActionError(error.message);
+                  }
+                }}
               >
                 <Heart size={22} strokeWidth={1.8} aria-hidden="true" />
               </button>
               <p>{isFavorite ? "Στα αγαπημένα" : "Εκτός αγαπημένων"}</p>
             </div>
 
-            {message && (
-              <p className="feedback feedback-success">{message}</p>
-            )}
+            {message && <p className="feedback feedback-success">{message}</p>}
             {actionError && (
               <p className="feedback feedback-error">{actionError}</p>
             )}
@@ -138,8 +161,18 @@ export default function BookDetails({
           {user && isAdmin && (
             <div className="book-details-management">
               <div className="book-details-actions">
-                <Link className="button button-secondary" to={`/books/${book.id}/edit`}>Edit book</Link>
-                <Link className="button button-danger" to={`/books/${book.id}/delete`}>Delete book</Link>
+                <Link
+                  className="button button-secondary"
+                  to={`/books/${book.id}/edit`}
+                >
+                  Edit book
+                </Link>
+                <Link
+                  className="button button-danger"
+                  to={`/books/${book.id}/delete`}
+                >
+                  Delete book
+                </Link>
               </div>
             </div>
           )}

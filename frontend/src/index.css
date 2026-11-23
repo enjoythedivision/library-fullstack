@@ -79,6 +79,30 @@ main {
   padding: 0 var(--page-gutter) 4rem;
 }
 
+.favorites-page {
+  padding-top: 2rem;
+}
+
+.favorite-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.favorite-row img {
+  width: 60px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.favorite-info {
+  flex: 1 1 150px;
+  overflow-wrap: anywhere;
+}
+
 .page-note {
   color: var(--color-muted);
   font-size: 0.95rem;
