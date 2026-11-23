@@ -163,7 +163,18 @@ public class BooksController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        var notifiedUsers = await _context.Favorites.Where(f => f.BookId == book.Id).Select(f=>f.UserId).ToListAsync();
+        var userIdsToNotify = await _context.Favorites
+            .Where(favorite => favorite.BookId == book.Id)
+            .Select(favorite => favorite.UserId)
+            .ToListAsync();
+
+        await _hubContext.Clients
+            .Users(userIdsToNotify)
+            .SendAsync("BookAvailable", new
+            {
+                bookId = book.Id,
+                title = book.Title
+            });
 
         return NoContent();
     }
