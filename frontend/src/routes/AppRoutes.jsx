@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import BookDetails from "../pages/books/BookDetails";
 import AddBook from "../pages/books/AddBook";
@@ -85,16 +85,26 @@ export default function AppRoutes({
       <Route
         path="/favorites"
         element={
-          <Favorites
-            favorites={favorites}
-            handleRemoveFavorite={handleRemoveFavorite}
-            user={user}
-          />
+          user === undefined ? null : user ? (
+            <Favorites
+              favorites={favorites}
+              handleRemoveFavorite={handleRemoveFavorite}
+              user={user}
+            />
+          ) : (
+            <Navigate to="/login" replace />
+          )
         }
       />
       <Route
         path="/login"
-        element={<Login fetchCurrentUser={fetchCurrentUser} refreshBooks={refreshBooks} />}
+        element={
+          user === undefined ? null : user ? (
+            <Navigate to="/" replace />
+          ) : (
+            <Login fetchCurrentUser={fetchCurrentUser} refreshBooks={refreshBooks} />
+          )
+        }
       />
       <Route path="/register" element={<Register />} />
       <Route

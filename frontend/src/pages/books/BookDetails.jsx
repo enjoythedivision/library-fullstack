@@ -128,8 +128,6 @@ export default function BookDetails({
               <button
                 type="button"
                 className="button button-secondary book-favorite-button"
-                aria-label="Add to favorites"
-                title="Add to favorites"
                 onClick={() => {
                   if (isFavorite) {
                     handleRemoveFavorite(book.id);

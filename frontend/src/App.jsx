@@ -12,7 +12,7 @@ import { getBooks, borrowBook, returnBook } from "./services/booksApi";
 import { getCurrentUser, getAdminStatus } from "./services/authApi";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
   const [books, setBooks] = useState([]);
   const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
@@ -55,13 +55,11 @@ function App() {
     try {
       const currentUser = await getCurrentUser();
       setUser(currentUser);
+      await refreshFavorites();
     } catch {
       setUser(null);
       setFavorites([]);
-      return;
     }
-
-    await refreshFavorites();
   }
 
   async function checkIsAdmin() {
