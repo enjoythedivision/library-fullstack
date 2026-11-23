@@ -150,6 +150,7 @@ function App() {
             refreshBooks={refreshBooks}
             fetchCurrentUser={fetchCurrentUser}
             setUser={setUser}
+            setFavorites={setFavorites}
           />
         </motion.main>
       </AnimatePresence>

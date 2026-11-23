@@ -24,6 +24,7 @@ export default function AppRoutes({
   refreshBooks,
   fetchCurrentUser,
   setUser,
+  setFavorites,
 }) {
   return (
     <Routes location={location}>
@@ -98,7 +99,13 @@ export default function AppRoutes({
       <Route path="/register" element={<Register />} />
       <Route
         path="/logout"
-        element={<Logout setUser={setUser} refreshBooks={refreshBooks} />}
+        element={
+          <Logout
+            setUser={setUser}
+            setFavorites={setFavorites}
+            refreshBooks={refreshBooks}
+          />
+        }
       />
     </Routes>
   );

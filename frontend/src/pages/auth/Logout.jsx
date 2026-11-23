@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { logoutUser } from "../../services/authApi";
 import "./Auth.css";
 
-export default function Logout({ setUser, refreshBooks }) {
+export default function Logout({ setUser, setFavorites, refreshBooks }) {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export default function Logout({ setUser, refreshBooks }) {
       await logoutUser();
 
       setUser(null);
+      setFavorites([]);
       await refreshBooks();
       navigate("/", {
         state: { notice: "You're signed out. You can still browse the collection." },
