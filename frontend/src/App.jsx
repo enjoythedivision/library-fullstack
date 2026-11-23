@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   getFavorites,
   addFavorite,
@@ -15,7 +15,7 @@ import { API_URL } from "./services/apiConfig";
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [notification, setNotification] = useState("");
+  const [notification, setNotification] = useState(null);
   const [books, setBooks] = useState([]);
   const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
@@ -138,7 +138,13 @@ function App() {
     }
 
     connection.on("BookAvailable", book => {
-      setNotification(`Your favorite book ${book.title} is available again.`);
+      setNotification(
+        <>
+          Your favorite book{" "}
+          <Link to={`/books/${book.bookId}`}>{book.title}</Link>{" "}
+          is available again.
+        </>
+      );
     });
 
     // Start the connection.
@@ -159,7 +165,7 @@ function App() {
           <button
             type="button"
             aria-label="Close notification"
-            onClick={() => setNotification("")}
+            onClick={() => setNotification(null)}
           >
             ×
           </button>
