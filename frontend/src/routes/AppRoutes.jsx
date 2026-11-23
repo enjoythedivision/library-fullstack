@@ -7,6 +7,7 @@ import DeleteBook from "../pages/books/DeleteBook";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import Logout from "../pages/auth/Logout";
+import Favorites from "../pages/books/Favorites";
 
 export default function AppRoutes({
   location,
@@ -74,6 +75,7 @@ export default function AppRoutes({
           />
         }
       />
+      <Route path="/favorites" element={<Favorites />}/>
       <Route
         path="/login"
         element={<Login fetchCurrentUser={fetchCurrentUser} refreshBooks={refreshBooks} />}
