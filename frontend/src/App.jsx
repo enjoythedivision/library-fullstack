@@ -14,6 +14,7 @@ function App() {
   const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   const location = useLocation();
   const reducedMotion = useReducedMotion();
 
