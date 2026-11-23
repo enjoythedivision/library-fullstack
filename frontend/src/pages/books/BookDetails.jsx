@@ -138,9 +138,12 @@ export default function BookDetails({
                   }
                 }}
               >
-                <Heart size={22} strokeWidth={1.8} aria-hidden="true" />
+                <Heart
+                  size={22}
+                  strokeWidth={1.8}
+                  fill={isFavorite ? "currentColor" : "none"}
+                />
               </button>
-              <p>{isFavorite ? "Στα αγαπημένα" : "Εκτός αγαπημένων"}</p>
             </div>
 
             {message && <p className="feedback feedback-success">{message}</p>}
