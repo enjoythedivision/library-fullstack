@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 import { loginUser } from "../../services/authApi";
 
-export default function Login({ fetchCurrentUser, fetchBooks }) {
+export default function Login({ fetchCurrentUser, refreshBooks }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,7 +22,7 @@ export default function Login({ fetchCurrentUser, fetchBooks }) {
       let notice = "Signed in successfully.";
       try {
         await fetchCurrentUser();
-        if (!await fetchBooks()) {
+        if (!await refreshBooks()) {
           notice = "You're signed in, but the library could not refresh. Please reload the page.";
         }
       } catch {

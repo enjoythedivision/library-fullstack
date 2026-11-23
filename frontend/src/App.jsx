@@ -18,7 +18,7 @@ function App() {
   const location = useLocation();
   const reducedMotion = useReducedMotion();
 
-  const fetchBooks = async () => {
+  const refreshBooks = async () => {
     setBooksLoading(true);
     setBooksError("");
     try {
@@ -35,12 +35,12 @@ function App() {
   async function handleBorrow(bookId) {
     try {
       await borrowBook(bookId);
-      const refreshed = await fetchBooks();
+      const refreshed = await refreshBooks();
       return { ok: true, message: refreshed
         ? "Book borrowed successfully."
         : "Book borrowed. Reload the collection to see the latest status." };
     } catch (error) {
-      await fetchBooks();
+      await refreshBooks();
       return { ok: false, message: error.message };
     }
   }
@@ -48,12 +48,12 @@ function App() {
   async function handleReturn(bookId) {
     try {
       await returnBook(bookId);
-      const refreshed = await fetchBooks();
+      const refreshed = await refreshBooks();
       return { ok: true, message: refreshed
         ? "Book returned successfully."
         : "Book returned. Reload the collection to see the latest status." };
     } catch (error) {
-      await fetchBooks();
+      await refreshBooks();
       return { ok: false, message: error.message };
     }
   }
@@ -76,7 +76,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetchBooks();
+    refreshBooks();
     fetchCurrentUser();
   }, []);
 
@@ -109,7 +109,7 @@ function App() {
           {booksError && (
             <div className="feedback feedback-error collection-error">
               <p>{booksError}</p>
-              <button className="button button-secondary" onClick={fetchBooks} disabled={booksLoading}>
+              <button className="button button-secondary" onClick={refreshBooks} disabled={booksLoading}>
                 {booksLoading ? "Refreshing…" : "Try again"}
               </button>
             </div>
@@ -123,7 +123,7 @@ function App() {
             isAdmin={isAdmin}
             handleBorrow={handleBorrow}
             handleReturn={handleReturn}
-            fetchBooks={fetchBooks}
+            refreshBooks={refreshBooks}
             fetchCurrentUser={fetchCurrentUser}
             setUser={setUser}
           />

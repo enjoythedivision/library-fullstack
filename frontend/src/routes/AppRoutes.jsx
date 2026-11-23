@@ -17,7 +17,7 @@ export default function AppRoutes({
   isAdmin,
   handleBorrow,
   handleReturn,
-  fetchBooks,
+  refreshBooks,
   fetchCurrentUser,
   setUser,
 }) {
@@ -50,7 +50,7 @@ export default function AppRoutes({
       />
       <Route
         path="/addbook"
-        element={<AddBook fetchBooks={fetchBooks} />}
+        element={<AddBook refreshBooks={refreshBooks} />}
       />
       <Route
         path="/books/:id/edit"
@@ -59,7 +59,7 @@ export default function AppRoutes({
             books={books}
             booksLoading={booksLoading}
             booksError={booksError}
-            fetchBooks={fetchBooks}
+            refreshBooks={refreshBooks}
           />
         }
       />
@@ -70,18 +70,18 @@ export default function AppRoutes({
             books={books}
             booksLoading={booksLoading}
             booksError={booksError}
-            fetchBooks={fetchBooks}
+            refreshBooks={refreshBooks}
           />
         }
       />
       <Route
         path="/login"
-        element={<Login fetchCurrentUser={fetchCurrentUser} fetchBooks={fetchBooks} />}
+        element={<Login fetchCurrentUser={fetchCurrentUser} refreshBooks={refreshBooks} />}
       />
       <Route path="/register" element={<Register />} />
       <Route
         path="/logout"
-        element={<Logout setUser={setUser} fetchBooks={fetchBooks} />}
+        element={<Logout setUser={setUser} refreshBooks={refreshBooks} />}
       />
     </Routes>
   );

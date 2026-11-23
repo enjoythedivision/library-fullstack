@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./BookForm.css";
 import { addBook } from "../../services/booksApi";
 
-export default function AddBook({ fetchBooks }) {
+export default function AddBook({ refreshBooks }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
@@ -20,7 +20,7 @@ export default function AddBook({ fetchBooks }) {
     try {
       await addBook({ title: title.trim(), author: author.trim(), description });
 
-      await fetchBooks();
+      await refreshBooks();
       navigate("/", { state: { notice: "Book added to the collection." } });
     } catch (error) {
       setError(error.message);

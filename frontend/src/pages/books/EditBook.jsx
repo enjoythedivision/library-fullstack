@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "./BookForm.css";
 import { editBook } from "../../services/booksApi";
 
-export default function EditBook({ books, booksLoading, booksError, fetchBooks }) {
+export default function EditBook({ books, booksLoading, booksError, refreshBooks }) {
   const { id } = useParams();
   const bookToEdit = books.find((book) => book.id === Number(id));
 
@@ -13,10 +13,10 @@ export default function EditBook({ books, booksLoading, booksError, fetchBooks }
     return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
   }
 
-  return <EditBookForm key={bookToEdit.id} book={bookToEdit} fetchBooks={fetchBooks} />;
+  return <EditBookForm key={bookToEdit.id} book={bookToEdit} refreshBooks={refreshBooks} />;
 }
 
-function EditBookForm({ book, fetchBooks }) {
+function EditBookForm({ book, refreshBooks }) {
   const navigate = useNavigate();
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
@@ -38,7 +38,7 @@ function EditBookForm({ book, fetchBooks }) {
         description,
       });
 
-      await fetchBooks();
+      await refreshBooks();
       navigate(`/books/${book.id}`, { state: { notice: "Book details updated." } });
     } catch (error) {
       setError(error.message);

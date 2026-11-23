@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import "./BookForm.css";
 import { deleteBook } from "../../services/booksApi";
 
-export default function DeleteBook({ books, booksLoading, booksError, fetchBooks }) {
+export default function DeleteBook({ books, booksLoading, booksError, refreshBooks }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [error, setError] = useState("");
@@ -24,7 +24,7 @@ export default function DeleteBook({ books, booksLoading, booksError, fetchBooks
     try {
       await deleteBook(id);
 
-      await fetchBooks();
+      await refreshBooks();
       navigate("/", { state: { notice: "Book removed from the collection." } });
     } catch (error) {
       setError(error.message);
