@@ -18,6 +18,7 @@ function App() {
   const [booksError, setBooksError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const [favoritesError, setFavoritesError] = useState("");
   const location = useLocation();
   const reducedMotion = useReducedMotion();
 
@@ -60,11 +61,7 @@ function App() {
       return;
     }
 
-    try {
-      await refreshFavorites();
-    } catch {
-      setFavorites([]);
-    }
+    await refreshFavorites();
   }
 
   async function checkIsAdmin() {
@@ -77,18 +74,36 @@ function App() {
   }
 
   async function refreshFavorites() {
-    const updatedFavorites = await getFavorites();
-    setFavorites(updatedFavorites);
+    setFavoritesError("");
+
+    try {
+      const updatedFavorites = await getFavorites();
+      setFavorites(updatedFavorites);
+    } catch (error) {
+      setFavoritesError(error.message);
+    }
   }
 
   async function handleAddFavorite(bookId) {
-    await addFavorite(bookId);
-    await refreshFavorites();
+    setFavoritesError("");
+
+    try {
+      await addFavorite(bookId);
+      await refreshFavorites();
+    } catch (error) {
+      setFavoritesError(error.message);
+    }
   }
 
   async function handleRemoveFavorite(bookId) {
-    await removeFavorite(bookId);
-    await refreshFavorites();
+    setFavoritesError("");
+
+    try {
+      await removeFavorite(bookId);
+      await refreshFavorites();
+    } catch (error) {
+      setFavoritesError(error.message);
+    }
   }
 
   useEffect(() => {
@@ -121,6 +136,11 @@ function App() {
           {location.state?.notice && (
             <p className="feedback feedback-success route-notice">
               {location.state.notice}
+            </p>
+          )}
+          {favoritesError && (
+            <p className="feedback feedback-error" role="alert">
+              {favoritesError}
             </p>
           )}
           {booksError && (

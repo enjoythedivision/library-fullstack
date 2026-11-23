@@ -130,15 +130,11 @@ export default function BookDetails({
                 className="button button-secondary book-favorite-button"
                 aria-label="Add to favorites"
                 title="Add to favorites"
-                onClick={async () => {
-                  try {
-                    if (isFavorite) {
-                      await handleRemoveFavorite(book.id);
-                    } else {
-                      await handleAddFavorite(book.id);
-                    }
-                  } catch (error) {
-                    setActionError(error.message);
+                onClick={() => {
+                  if (isFavorite) {
+                    handleRemoveFavorite(book.id);
+                  } else {
+                    handleAddFavorite(book.id);
                   }
                 }}
               >
