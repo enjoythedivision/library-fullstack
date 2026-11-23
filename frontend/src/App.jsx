@@ -10,7 +10,6 @@ import Header from "./components/Header";
 import AppRoutes from "./routes/AppRoutes";
 import { getBooks, borrowBook, returnBook } from "./services/booksApi";
 import { getCurrentUser, getAdminStatus } from "./services/authApi";
-import { HubConnectionBuilder } from "@microsoft/signalr";
 import * as signalR from "@microsoft/signalr";
 import { API_URL } from "./services/apiConfig";
 
@@ -127,6 +126,7 @@ function App() {
       .withUrl(`${API_URL}/Notifications`)
       .withAutomaticReconnect([0, 0, 10000])
       .build();
+      
     async function start() {
       try {
         await connection.start();
