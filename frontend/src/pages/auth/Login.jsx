@@ -19,16 +19,9 @@ export default function Login({ fetchCurrentUser, refreshBooks }) {
     try {
       await loginUser({ email, password });
 
-      let notice = "Signed in successfully.";
-      try {
-        await fetchCurrentUser();
-        if (!await refreshBooks()) {
-          notice = "You're signed in, but the library could not refresh. Please reload the page.";
-        }
-      } catch {
-        notice = "You're signed in, but the library could not refresh. Please reload the page.";
-      }
-      navigate("/", { state: { notice } });
+      await fetchCurrentUser();
+      await refreshBooks();
+      navigate("/", { state: { notice: "Signed in successfully." } });
     } catch (error) {
       setError(error.message);
     } finally {

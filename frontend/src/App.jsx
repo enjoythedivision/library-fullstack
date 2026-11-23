@@ -18,43 +18,32 @@ function App() {
   const location = useLocation();
   const reducedMotion = useReducedMotion();
 
-  const refreshBooks = async () => {
+  async function refreshBooks() {
     setBooksLoading(true);
     setBooksError("");
+
     try {
       setBooks(await getBooks());
-      return true;
     } catch {
       setBooksError("We couldn't refresh the collection. Please try again.");
-      return false;
     } finally {
       setBooksLoading(false);
     }
-  };
+  }
 
   async function handleBorrow(bookId) {
     try {
       await borrowBook(bookId);
-      const refreshed = await refreshBooks();
-      return { ok: true, message: refreshed
-        ? "Book borrowed successfully."
-        : "Book borrowed. Reload the collection to see the latest status." };
-    } catch (error) {
+    } finally {
       await refreshBooks();
-      return { ok: false, message: error.message };
     }
   }
 
   async function handleReturn(bookId) {
     try {
       await returnBook(bookId);
-      const refreshed = await refreshBooks();
-      return { ok: true, message: refreshed
-        ? "Book returned successfully."
-        : "Book returned. Reload the collection to see the latest status." };
-    } catch (error) {
+    } finally {
       await refreshBooks();
-      return { ok: false, message: error.message };
     }
   }
 
@@ -90,7 +79,9 @@ function App() {
 
   return (
     <div>
-      <a className="skip-link" href="#main-content">Skip to content</a>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <Header user={user} isAdmin={isAdmin} />
 
       <AnimatePresence mode="wait">
@@ -104,12 +95,18 @@ function App() {
           transition={{ duration: reducedMotion ? 0 : 0.35 }}
         >
           {location.state?.notice && (
-            <p className="feedback feedback-success route-notice">{location.state.notice}</p>
+            <p className="feedback feedback-success route-notice">
+              {location.state.notice}
+            </p>
           )}
           {booksError && (
             <div className="feedback feedback-error collection-error">
               <p>{booksError}</p>
-              <button className="button button-secondary" onClick={refreshBooks} disabled={booksLoading}>
+              <button
+                className="button button-secondary"
+                onClick={refreshBooks}
+                disabled={booksLoading}
+              >
                 {booksLoading ? "Refreshing…" : "Try again"}
               </button>
             </div>

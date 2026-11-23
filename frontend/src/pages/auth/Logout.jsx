@@ -17,11 +17,10 @@ export default function Logout({ setUser, refreshBooks }) {
       await logoutUser();
 
       setUser(null);
-      const refreshed = await refreshBooks();
-      const notice = refreshed
-        ? "You're signed out. You can still browse the collection."
-        : "You're signed out. Please reload the page to refresh the collection.";
-      navigate("/", { state: { notice } });
+      await refreshBooks();
+      navigate("/", {
+        state: { notice: "You're signed out. You can still browse the collection." },
+      });
     } catch (error) {
       setError(error.message);
     } finally {

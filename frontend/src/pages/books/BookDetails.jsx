@@ -14,7 +14,8 @@ export default function BookDetails({
 }) {
   const { id } = useParams();
   const [pendingAction, setPendingAction] = useState(null);
-  const [feedback, setFeedback] = useState(null);
+  const [message, setMessage] = useState("");
+  const [actionError, setActionError] = useState("");
   const [failedImageUrl, setFailedImageUrl] = useState(null);
   const book = books.find((book) => book.id === Number(id));
 
@@ -41,13 +42,19 @@ export default function BookDetails({
 
   async function handleLoanAction(action) {
     setPendingAction(action);
-    setFeedback(null);
+    setMessage("");
+    setActionError("");
 
     try {
-      const result = await (action === "borrow" ? onBorrow(book.id) : onReturn(book.id));
-      setFeedback(result);
-    } catch {
-      setFeedback({ ok: false, message: "We couldn't update this loan. Please try again." });
+      if (action === "borrow") {
+        await onBorrow(book.id);
+        setMessage("Book borrowed successfully.");
+      } else {
+        await onReturn(book.id);
+        setMessage("Book returned successfully.");
+      }
+    } catch (error) {
+      setActionError(error.message || "We couldn't update this loan. Please try again.");
     } finally {
       setPendingAction(null);
     }
@@ -110,12 +117,11 @@ export default function BookDetails({
               </button>
             </div>
 
-            {feedback && (
-              <p
-                className={`feedback ${feedback.ok ? "feedback-success" : "feedback-error"}`}
-              >
-                {feedback.message}
-              </p>
+            {message && (
+              <p className="feedback feedback-success">{message}</p>
+            )}
+            {actionError && (
+              <p className="feedback feedback-error">{actionError}</p>
             )}
           </div>
 
