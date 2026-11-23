@@ -54,3 +54,25 @@ npm run dev
 This starts the Vite frontend and the ASP.NET Core backend with automatic reload. The frontend normally runs at http://localhost:5173 and the backend at http://localhost:5038. Press Ctrl+C to stop both processes.
 
 To run either service separately, use `npm run dev:frontend` or `npm run dev:backend`.
+
+### Local test accounts
+
+With the app running, open [Register](http://localhost:5173/register) and create
+accounts using these sample credentials:
+
+| Account | Email | Password |
+| --- | --- | --- |
+| Reader 1 | reader1@example.com | LibraryTest1! |
+| Reader 2 | reader2@example.com | LibraryTest2! |
+
+These accounts are not created automatically. Register each account once in your
+local database, then use [Login](http://localhost:5173/login) on later visits.
+Successful registration stores the user in the `AspNetUsers` table in
+`backend/library.db` when running with the development commands above. ASP.NET
+Core Identity stores a password hash, rather than the plaintext password.
+New registrations are regular users, without the Admin role.
+
+To test behavior between two users, sign in as Reader 1 in a normal browser
+window and Reader 2 in a private/incognito window. Each developer's local
+database is independent; registering on one machine does not create accounts
+on another. These public credentials are intended only for local testing.
