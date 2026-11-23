@@ -52,9 +52,18 @@ function App() {
 
   async function fetchCurrentUser() {
     try {
-      setUser(await getCurrentUser());
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
     } catch {
       setUser(null);
+      setFavorites([]);
+      return;
+    }
+
+    try {
+      await refreshFavorites();
+    } catch {
+      setFavorites([]);
     }
   }
 
