@@ -79,20 +79,6 @@ main {
   padding: 0 var(--page-gutter) 4rem;
 }
 
-.skip-link {
-  position: absolute;
-  left: 1rem;
-  top: -5rem;
-  z-index: 10;
-  padding: 0.65rem 1rem;
-  background: var(--color-accent);
-  color: var(--color-bg);
-}
-
-.skip-link:focus {
-  top: 1rem;
-}
-
 .page-note {
   color: var(--color-muted);
   font-size: 0.95rem;

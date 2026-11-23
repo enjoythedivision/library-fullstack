@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useLocation } from "react-router-dom";
-
+import {
+  getFavorites,
+  addFavorite,
+  removeFavorite,
+} from "./services/favoritesApi";
 import Header from "./components/Header";
 import AppRoutes from "./routes/AppRoutes";
-
 import { getBooks, borrowBook, returnBook } from "./services/booksApi";
 import { getCurrentUser, getAdminStatus } from "./services/authApi";
 
@@ -14,6 +17,7 @@ function App() {
   const [booksLoading, setBooksLoading] = useState(true);
   const [booksError, setBooksError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   const location = useLocation();
   const reducedMotion = useReducedMotion();
 
@@ -63,6 +67,21 @@ function App() {
     }
   }
 
+  async function refreshFavorites() {
+    const updatedFavorites = await getFavorites();
+    setFavorites(updatedFavorites);
+  }
+
+  async function handleAddFavorite(bookId) {
+    await addFavorite(bookId);
+    await refreshFavorites();
+  }
+
+  async function handleRemoveFavorite(bookId) {
+    await removeFavorite(bookId);
+    await refreshFavorites();
+  }
+
   useEffect(() => {
     refreshBooks();
     fetchCurrentUser();
@@ -78,9 +97,6 @@ function App() {
 
   return (
     <div>
-      <a className="skip-link" href="#main-content">
-        Skip to content
-      </a>
       <Header user={user} isAdmin={isAdmin} />
 
       <AnimatePresence mode="wait">
