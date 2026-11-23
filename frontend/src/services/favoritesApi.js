@@ -2,7 +2,6 @@ import { API_URL } from "./apiConfig";
 
 async function getFavorites() {
   const response = await fetch(`${API_URL}/api/Favorites/`, {
-    method: "GET",
     credentials: "include",
   });
 

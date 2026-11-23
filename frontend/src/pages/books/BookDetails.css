@@ -78,9 +78,6 @@
 }
 
 .book-favorite-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding-inline: 0.85rem;
 }
 
