@@ -4,6 +4,9 @@ import { Heart } from "lucide-react";
 import "./BookDetails.css";
 
 export default function BookDetails({
+  favorites,
+  handleAddFavorite,
+  handleRemoveFavorite,
   books,
   booksLoading,
   booksError,
@@ -31,6 +34,7 @@ export default function BookDetails({
     );
   }
 
+  const isFavorite = favorites.some(f=>f.id === book.id);
   const isBorrowed = Boolean(book.borrowedByUserId);
   const isBorrowedByMe = Boolean(user && book.isBorrowedByMe);
   const statusText = isBorrowedByMe
@@ -115,6 +119,7 @@ export default function BookDetails({
               >
                 <Heart size={22} strokeWidth={1.8} aria-hidden="true" />
               </button>
+              <p>{isFavorite ? "Στα αγαπημένα" : "Εκτός αγαπημένων"}</p>
             </div>
 
             {message && (

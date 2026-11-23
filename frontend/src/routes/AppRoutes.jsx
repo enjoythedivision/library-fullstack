@@ -10,6 +10,9 @@ import Logout from "../pages/auth/Logout";
 import Favorites from "../pages/books/Favorites";
 
 export default function AppRoutes({
+  favorites,
+  handleAddFavorite,
+  handleRemoveFavorite,
   location,
   books,
   booksLoading,
@@ -39,6 +42,9 @@ export default function AppRoutes({
         path="/books/:id"
         element={
           <BookDetails
+            favorites={favorites}
+            handleAddFavorite={handleAddFavorite}
+            handleRemoveFavorite={handleRemoveFavorite}
             books={books}
             booksLoading={booksLoading}
             booksError={booksError}
@@ -75,7 +81,16 @@ export default function AppRoutes({
           />
         }
       />
-      <Route path="/favorites" element={<Favorites />}/>
+      <Route
+        path="/favorites"
+        element={
+          <Favorites
+            favorites={favorites}
+            handleRemoveFavorite={handleRemoveFavorite}
+            user={user}
+          />
+        }
+      />
       <Route
         path="/login"
         element={<Login fetchCurrentUser={fetchCurrentUser} refreshBooks={refreshBooks} />}

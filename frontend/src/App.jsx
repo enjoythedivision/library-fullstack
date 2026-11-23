@@ -127,6 +127,9 @@ function App() {
             </div>
           )}
           <AppRoutes
+            favorites={favorites}
+            handleAddFavorite={handleAddFavorite}
+            handleRemoveFavorite={handleRemoveFavorite}
             location={location}
             books={books}
             booksLoading={booksLoading}
