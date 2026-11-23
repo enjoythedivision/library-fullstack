@@ -50,8 +50,8 @@ export default function AppRoutes({
             booksLoading={booksLoading}
             booksError={booksError}
             user={user}
-            onBorrow={handleBorrow}
-            onReturn={handleReturn}
+            handleBorrow={handleBorrow}
+            handleReturn={handleReturn}
             isAdmin={isAdmin}
           />
         }
@@ -89,7 +89,6 @@ export default function AppRoutes({
             <Favorites
               favorites={favorites}
               handleRemoveFavorite={handleRemoveFavorite}
-              user={user}
             />
           ) : (
             <Navigate to="/login" replace />

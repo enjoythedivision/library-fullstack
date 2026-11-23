@@ -11,8 +11,8 @@ export default function BookDetails({
   booksLoading,
   booksError,
   user,
-  onBorrow,
-  onReturn,
+  handleBorrow,
+  handleReturn,
   isAdmin,
 }) {
   const { id } = useParams();
@@ -57,9 +57,9 @@ export default function BookDetails({
 
     try {
       if (action === "borrow") {
-        await onBorrow(book.id);
+        await handleBorrow(book.id);
       } else {
-        await onReturn(book.id);
+        await handleReturn(book.id);
       }
     } catch (error) {
       setActionError(

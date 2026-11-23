@@ -1,10 +1,10 @@
 export default function Favorites({ favorites, handleRemoveFavorite}) {
   return (
     <section className="favorites-page">
-      <h1>My favourites</h1>
+      <h1>My favorites</h1>
 
       {favorites.length === 0 ? (
-        <p className="page-note">Your wishlist is empty.</p>
+        <p className="page-note">Your favorites is empty.</p>
       ) : (
         <div>
           {favorites.map(f => (

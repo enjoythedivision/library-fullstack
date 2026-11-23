@@ -22,7 +22,7 @@ public class FavoritesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Book>>> GetFavouriteBooks()
+    public async Task<ActionResult<IEnumerable<Book>>> GetFavoriteBooks()
     {
         var currentUser = await _userManager.GetUserAsync(User);
         if (currentUser is null)

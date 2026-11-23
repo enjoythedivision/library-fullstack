@@ -31,3 +31,7 @@ Thumbs.db
 
 # Local notes
 /todo.md
+
+# SQLite temporary files
+*.db-shm
+*.db-wal
