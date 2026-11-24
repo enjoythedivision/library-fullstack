@@ -32,6 +32,10 @@ function App() {
     } catch {
       setBooksError("We couldn't refresh the collection. Please try again.");
     }
+
+    if (user) {
+      await refreshFavorites();
+    }
   }
 
   async function handleBorrow(bookId) {
@@ -133,13 +137,13 @@ function App() {
       }
     }
 
-    connection.on("BookAvailable", book => {
+    connection.on("BookAvailable", (book) => {
       setNotification(
         <>
           Your favorite book{" "}
-          <Link to={`/books/${book.bookId}`}>{book.title}</Link>{" "}
-          is available again.
-        </>
+          <Link to={`/books/${book.bookId}`}>{book.title}</Link> is available
+          again.
+        </>,
       );
     });
 
