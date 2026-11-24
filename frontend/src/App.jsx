@@ -121,6 +121,15 @@ function App() {
   }, [user]);
 
   useEffect(() => {
+    if (!notification) return;
+    const timer = setTimeout(() => {
+      setNotification(null);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [notification]);
+
+  useEffect(() => {
     if (!user) return;
 
     const connection = new signalR.HubConnectionBuilder()
