@@ -7,6 +7,7 @@ export default function AddBook({ refreshBooks }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +19,12 @@ export default function AddBook({ refreshBooks }) {
     setIsSubmitting(true);
 
     try {
-      await addBook({ title: title.trim(), author: author.trim(), description });
+      await addBook({
+        title: title.trim(),
+        author: author.trim(),
+        description,
+        imageUrl
+      });
 
       await refreshBooks();
       navigate("/");
@@ -35,7 +41,9 @@ export default function AddBook({ refreshBooks }) {
         <h1 className="form-title">Add a book</h1>
         <form className="form-fields" onSubmit={handleSubmit}>
           <div className="field">
-            <label className="field-label" htmlFor="book-title">Title</label>
+            <label className="field-label" htmlFor="book-title">
+              Title
+            </label>
             <input
               id="book-title"
               name="title"
@@ -47,7 +55,9 @@ export default function AddBook({ refreshBooks }) {
             />
           </div>
           <div className="field">
-            <label className="field-label" htmlFor="book-author">Author</label>
+            <label className="field-label" htmlFor="book-author">
+              Author
+            </label>
             <input
               id="book-author"
               name="author"
@@ -59,7 +69,9 @@ export default function AddBook({ refreshBooks }) {
             />
           </div>
           <div className="field">
-            <label className="field-label" htmlFor="book-description">Description <span className="field-optional">(optional)</span></label>
+            <label className="field-label" htmlFor="book-description">
+              Description <span className="field-optional">(optional)</span>
+            </label>
             <textarea
               id="book-description"
               name="description"
@@ -69,12 +81,25 @@ export default function AddBook({ refreshBooks }) {
               onChange={(event) => setDescription(event.target.value)}
             />
           </div>
+          <div className="field">
+            <label htmlFor="image-url">Cover URL</label>
+            <textarea
+              name="url"
+              id="image-url"
+              className="form-textarea"
+              value={imageUrl}
+              placeholder="Paste the URL here"
+              onChange={(event) => setImageUrl(event.target.value)}
+            />
+          </div>
           {error && <p className="feedback feedback-error">{error}</p>}
           <div className="form-actions">
             <button className="button button-primary" disabled={isSubmitting}>
               Add book
             </button>
-            <Link className="button button-secondary" to="/">Cancel</Link>
+            <Link className="button button-secondary" to="/">
+              Cancel
+            </Link>
           </div>
         </form>
       </div>
