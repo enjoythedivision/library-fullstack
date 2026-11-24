@@ -16,7 +16,6 @@ export default function AppRoutes({
   handleRemoveFavorite,
   location,
   books,
-
   booksError,
   user,
   isAdmin,

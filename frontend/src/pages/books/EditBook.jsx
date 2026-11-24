@@ -7,9 +7,18 @@ export default function EditBook({ books, booksError, refreshBooks }) {
   const { id } = useParams();
   const bookToEdit = books.find((book) => book.id === Number(id));
 
-  if (!bookToEdit && booksError) return <p className="page-note">Book details could not be loaded.</p>;
+  if (!bookToEdit && booksError) {
+    return <p className="page-note">Book details could not be loaded.</p>;
+  }
   if (!bookToEdit) {
-    return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
+    return (
+      <div className="form-page">
+        <div className="form-card">
+          <h1 className="form-title">Book not found.</h1>
+          <Link className="button button-secondary" to="/">Back to books</Link>
+        </div>
+      </div>
+    );
   }
 
   return <EditBookForm key={bookToEdit.id} book={bookToEdit} refreshBooks={refreshBooks} />;

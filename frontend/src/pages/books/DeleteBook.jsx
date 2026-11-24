@@ -10,9 +10,18 @@ export default function DeleteBook({ books, booksError, refreshBooks }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const bookToDelete = books.find((book) => book.id === Number(id));
 
-  if (!bookToDelete && booksError) return <p className="page-note">Book details could not be loaded.</p>;
+  if (!bookToDelete && booksError) {
+    return <p className="page-note">Book details could not be loaded.</p>;
+  }
   if (!bookToDelete) {
-    return <div className="form-page"><div className="form-card"><h1 className="form-title">Book not found.</h1><Link className="button button-secondary" to="/">Back to books</Link></div></div>;
+    return (
+      <div className="form-page">
+        <div className="form-card">
+          <h1 className="form-title">Book not found.</h1>
+          <Link className="button button-secondary" to="/">Back to books</Link>
+        </div>
+      </div>
+    );
   }
 
   async function handleDelete() {

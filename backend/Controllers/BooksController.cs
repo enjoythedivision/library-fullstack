@@ -15,10 +15,9 @@ public class BooksController : ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IHubContext<NotificationsHub> _hubContext;
 
-
     public BooksController(
         AppDbContext context,
-        UserManager<IdentityUser> userManager, 
+        UserManager<IdentityUser> userManager,
         IHubContext<NotificationsHub> hubContext)
     {
         _context = context;
@@ -133,7 +132,6 @@ public class BooksController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
-
     }
 
     [Authorize]
@@ -178,5 +176,4 @@ public class BooksController : ControllerBase
 
         return NoContent();
     }
-
 }

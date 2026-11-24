@@ -10,7 +10,6 @@
   --color-muted: #aaa99e;
   --color-accent: #e7bd67;
   --color-danger: #eda99b;
-  --color-success: #b9ceb1;
   font-family: 'Open Sans', sans-serif;
   color: var(--color-text);
   background: var(--color-bg);
@@ -259,20 +258,8 @@ main {
   font-size: 0.9rem;
 }
 
-.catalog-results {
-  margin: 1.25rem 0 1.75rem;
-  color: var(--color-muted);
-  font-size: 0.8rem;
-}
-
 .empty-state {
   padding: 3rem 0;
-}
-
-.empty-state h2 {
-  margin-bottom: 0.7rem;
-  font-size: 1.4rem;
-  font-weight: 400;
 }
 
 @media (max-width: 600px) {

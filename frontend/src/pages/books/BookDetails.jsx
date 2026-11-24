@@ -9,7 +9,6 @@ export default function BookDetails({
   handleAddFavorite,
   handleRemoveFavorite,
   books,
-
   booksError,
   user,
   handleBorrow,

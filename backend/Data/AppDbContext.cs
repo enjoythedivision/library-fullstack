@@ -1,4 +1,4 @@
-﻿using LibraryApi.Models;
+using LibraryApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +14,4 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Book> Books { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
-
-    
 }

@@ -1,6 +1,5 @@
 import { API_URL } from "./apiConfig";
 
-//CREATE BOOK (ADMIN ONLY)
 export async function addBook(book) {
   const response = await fetch(`${API_URL}/api/Books`, {
     method: "POST",
@@ -19,7 +18,6 @@ export async function addBook(book) {
   }
 }
 
-//READ BOOKS
 export async function getBooks() {
   const response = await fetch(`${API_URL}/api/Books`, {
     credentials: "include",
@@ -32,7 +30,6 @@ export async function getBooks() {
   return response.json();
 }
 
-//UPDATE BOOK (ADMIN ONLY)
 export async function editBook(bookId, book) {
   const response = await fetch(`${API_URL}/api/Books/${bookId}`, {
     method: "PUT",
@@ -51,7 +48,6 @@ export async function editBook(bookId, book) {
   }
 }
 
-//DELETE BOOK (ADMIN ONLY)
 export async function deleteBook(bookId) {
   const response = await fetch(`${API_URL}/api/Books/${bookId}`, {
     method: "DELETE",
@@ -66,7 +62,6 @@ export async function deleteBook(bookId) {
   }
 }
 
-//BORROW BOOK
 export async function borrowBook(bookId) {
   const response = await fetch(`${API_URL}/api/Books/${bookId}/borrow`, {
     method: "POST",
@@ -83,7 +78,6 @@ export async function borrowBook(bookId) {
   }
 }
 
-//RETURN BOOK
 export async function returnBook(bookId) {
   const response = await fetch(`${API_URL}/api/Books/${bookId}/return`, {
     method: "POST",

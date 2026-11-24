@@ -23,7 +23,6 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactPolicy", policy =>
@@ -46,11 +45,10 @@ using (var scope = app.Services.CreateScope())
     {
         await roleManager.CreateAsync(new IdentityRole("Admin"));
     }
-
 }
+
 app.UseCors("ReactPolicy");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -58,7 +56,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 
-//ΜΙΝΙΜAL ENDPOINT TO CHECK IF THE USER IS AN ADMIN
 app.MapGet("/is-admin", (ClaimsPrincipal user) =>
 {
     return Results.Ok(new
@@ -68,7 +65,6 @@ app.MapGet("/is-admin", (ClaimsPrincipal user) =>
 })
 .RequireAuthorization();
 
-//MINIMAL LOGOUT ENDPOINT FROM DOCUMENTATION
 app.MapPost("/logout", async (
     SignInManager<IdentityUser> signInManager,
     [FromBody] object empty) =>

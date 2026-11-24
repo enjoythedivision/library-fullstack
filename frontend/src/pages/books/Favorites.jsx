@@ -1,31 +1,38 @@
-export default function Favorites({ favorites, favoritesError, handleRemoveFavorite }) {
+export default function Favorites({
+  favorites,
+  favoritesError,
+  handleRemoveFavorite,
+}) {
   return (
     <section className="favorites-page">
       <h1>My favorites</h1>
 
       {favoritesError && (
-        <p className="feedback feedback-error" role="alert">{favoritesError}</p>
+        <p className="feedback feedback-error" role="alert">
+          {favoritesError}
+        </p>
       )}
 
       {favorites.length === 0 ? (
-        !favoritesError &&
-        <p className="page-note">Your favorites is empty.</p>
+        !favoritesError && (
+          <p className="page-note">Your favorites are empty.</p>
+        )
       ) : (
         <div>
-          {favorites.map(f => (
-            <div className="favorite-row" key={f.id}>
-              {f.imageUrl && (
-                <img src={f.imageUrl} alt={`${f.title} cover`} />
+          {favorites.map((favorite) => (
+            <div className="favorite-row" key={favorite.id}>
+              {favorite.imageUrl && (
+                <img src={favorite.imageUrl} alt={`${favorite.title} cover`} />
               )}
 
               <div className="favorite-info">
-                <p><strong>{f.title}</strong></p>
-                <p className="page-note">{f.author}</p>
+                <p><strong>{favorite.title}</strong></p>
+                <p className="page-note">{favorite.author}</p>
               </div>
 
               <button
                 className="button button-secondary"
-                onClick={() => handleRemoveFavorite(f.id)}
+                onClick={() => handleRemoveFavorite(favorite.id)}
               >
                 Remove
               </button>

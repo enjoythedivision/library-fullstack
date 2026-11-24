@@ -147,9 +147,7 @@ function App() {
       );
     });
 
-    // Start the connection.
     start();
-    //Stop the connection
     return () => {
       connection.stop().catch(console.error);
     };
